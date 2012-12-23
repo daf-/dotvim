@@ -93,7 +93,6 @@ autocmd QuickFixCmdPost    l* nested lwindow
 
 " lets me have man pages in their own window and syntax colored
 autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
-autocmd BufRead,BufEnter *.py source ~/.vim_macros/pydoc-functions.vim
 
 " good for editing text files - Auto-formats paragraphs as they're changed
 autocmd BufRead,BufEnter,BufNewFile *.txt set formatoptions+=a
