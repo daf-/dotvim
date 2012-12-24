@@ -1,28 +1,41 @@
+" vim: set fdm=marker:
 set nocompatible
 
 " PLUGINS
 call pathogen#infect()
 
+" plugin settings {{{
+
 " load filetype plugins
 filetype plugin on
 
-" plugin settings
-"let g:Powerline_symbols = 'fancy'
 let NERDTreeIgnore=['\.pyc$']
 
-" ----------------------------------
-" COLOR, EDITING, REMAPS, FORMATTING
-" ----------------------------------
+" make powerline use solarized colors
+let g:Powerline_colorscheme = 'solarized256'
+let g:Powerline_symbols = 'fancy'
 
-" color
+" Syntastic
+let g:syntastic_python_checker="flake8"
+let g:syntastic_check_on_open=1
+
+" }}}
+
+" COLOR, EDITING, REMAPS, FORMATTING {{{
+" --------------------------------------
+
+" color, appearance
 syntax on
 if has('gui_running')
-    set guifont=Menlo\ Regular:h11
     colorscheme solarized
+    if has("mac")
+        set guifont=Menlo:h11
+    endif
 else
     set bg=dark
     colorscheme solarized
 endif
+
 
 " editing
 set number " line numbers
@@ -30,7 +43,8 @@ set mouse=a " can use mouse
 set go-=T " hide MacVim toolbar
 set splitbelow " split windows open below current window
 set textwidth=79 " max. width of text being inserted
-set scrolloff=8 " scrolling starts 5 lines from top or bottom of page
+set scrolloff=5 " scrolling starts 5 lines from top or bottom of page
+set laststatus=2 " always show status bar
 " formatting
 set formatoptions+=c " Auto-wrap text using textwidth
 set formatoptions+=r " Auto-insert current comment leader on next line
@@ -64,6 +78,7 @@ set ruler               " always show location information
 set showmatch           " show matching paren
 
 " remaps
+let mapleader=","
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -79,13 +94,14 @@ vnoremap <Tab> ^=
 map Y y$ " makes Y yank till end of line
 nnoremap j gj
 nnoremap k gk
-map <Leader>n :NERDTree<CR>
+map <Leader>n :NERDTreeToggle<CR>
+inoremap <C-@> <C-x><C-o>
+inoremap <C-Space> <C-x><C-o>
 
+" }}}
 
-
-" -----------------------------------
-" AUTOCMDS, FILETYPE OPTIONS
-" -----------------------------------
+" AUTOCMDS, FILETYPE OPTIONS {{{
+" --------------------------
 
 " compiling
 autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -93,13 +109,21 @@ autocmd QuickFixCmdPost    l* nested lwindow
 
 " lets me have man pages in their own window and syntax colored
 autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
+autocmd BufRead,BufEnter *.py source ~/.vim_macros/pydoc-functions.vim
 
 " good for editing text files - Auto-formats paragraphs as they're changed
 autocmd BufRead,BufEnter,BufNewFile *.txt set formatoptions+=a
-autocmd BufRead,BufEnter,BufNewFile README set formatoptions+=a
+" autocmd BufRead,BufEnter,BufNewFile README set formatoptions+=a
 
-" ____________
-" --- MISC ---
+" OMNICOMPLETION
+" from http://blog.fluther.com/django-vim/
+" must run "DJANGO_SETTINGS_FILE=myapp.settings vim" to work
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+" autocmd FileType python set omnifunc=pysmell#Complete
+
+" }}}
+
+"     MISC {{{
 " ____________
 
 
@@ -125,9 +149,10 @@ map <Leader>v <Esc>:tabnew ~/.vimrc<CR>
 map <Leader>b <Esc>:tabnew ~/.bash_profile<CR>
 set encoding=utf-8
 
-" -----------------------------------------------------------------------------
-" Ben Kuperman -- mostly macros
-" -----------------------------------------------------------------------------
+" }}}
+
+" Ben Kuperman -- mostly macros {{{
+" -----------------------------
 
 " I Make a bunch of text headlines
 map! <Leader>ul <esc>:let @h=@/<cr>yypV:s/^[ ]*//<CR>V:s/./-/g<cr>:let @/=@h<CR>kJi<CR><esc>o
@@ -200,3 +225,5 @@ if has("cscope")
         endif
         set csverb
 endif
+
+" }}}
