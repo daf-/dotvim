@@ -12,12 +12,17 @@ filetype plugin on
 let NERDTreeIgnore=['\.pyc$']
 
 " make powerline use solarized colors
-let g:Powerline_colorscheme = 'solarized256'
+set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
+let g:Powerline_colorscheme = 'solarized256'
 
 " Syntastic
 let g:syntastic_python_checker="flake8"
 let g:syntastic_check_on_open=1
+
+" NERDcommenter
+let g:NERDRemoveExtraSpaces=1
+let g:NERDSpaceDelims=1
 
 " }}}
 
@@ -29,7 +34,7 @@ syntax on
 if has('gui_running')
     colorscheme solarized
     if has("mac")
-        set guifont=Menlo:h11
+        set guifont=Menlo\ for\ Powerline\:h11
     endif
 else
     set bg=dark
@@ -54,7 +59,7 @@ set formatoptions+=n " recognizes numbered lists when formatting text
 set formatoptions+=2 " keeps indenting on different lines
 set foldmethod=syntax
 set foldnestmax=1
-set nofoldenable
+"set nofoldenable
 "set equalprg=indent\ -kr\ -nut "\ -prs " '=' command uses 'indent' unix prog to format code
 let honorcode='I affirm that I have adhered to the Honor Code in this assignment.'
 "TODO: implement echoing honorcode on <Leader>hc
@@ -64,8 +69,8 @@ set expandtab             " This makes them all spaces.
 set shiftwidth=4          " autoindent n spaces (not 8) (shiftwidth)
 set softtabstop=4         " Let's have better tabbing (never change tab size!)
 set backspace=2           " allow backspacing over everything in insert mode
-set cinkeys=0{,0},0),0#,!<Tab>,;,:,o,O,e " For emacs-like indenting (w/ cindent)
-set indentkeys=!<Tab>,o,O,:,0#,e " For emacs-like indenting (w/ cindent)
+set cinkeys=0{,0},0),0#,;,:,o,O,e " For emacs-like indenting (w/ cindent)
+set indentkeys=o,O,:,0#,e " For emacs-like indenting (w/ cindent)
 filetype plugin indent on " sets indentation based on file type
 
 " searching
@@ -94,9 +99,11 @@ vnoremap <Tab> ^=
 map Y y$ " makes Y yank till end of line
 nnoremap j gj
 nnoremap k gk
-map <Leader>n :NERDTreeToggle<CR>
 inoremap <C-@> <C-x><C-o>
 inoremap <C-Space> <C-x><C-o>
+" PLUGIN remaps
+map <Leader>n :NERDTreeToggle<CR>
+map <Leader>cc <plug>NERDCommenterToggle
 
 " }}}
 
@@ -144,10 +151,9 @@ cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 " ----------------
 set pumheight=5         " max number of things to show in pop-up-menu
 " avoid "press enter to continue" screens
-set cmdheight=2
+"set cmdheight=2
 map <Leader>v <Esc>:tabnew ~/.vimrc<CR>
 map <Leader>b <Esc>:tabnew ~/.bash_profile<CR>
-set encoding=utf-8
 
 " }}}
 
