@@ -1,11 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/danielfriedman/.vim/bundle/snipmate.vim'
-let g:netrw_dirhist_2='/usr/local/Cellar/dwm/6.0/share/man'
-let g:netrw_dirhist_3='/Users/danielfriedman/.vim/bundle/supercollider/bin/scpipe'
-let g:netrw_dirhist_4='/Users/danielfriedman/.vim/bundle/snipmate.vim'
-let g:netrw_dirhist_5='.vim'
-let g:netrw_dirhist_6='.vim/ftplugin'
-let g:netrw_dirhist_7='/Users/danielfriedman/.vim/bundle/python-mode/syntax'
-let g:netrw_dirhist_8='/Users/danielfriedman/.vim'
-let g:netrw_dirhist_9='/Users/danielfriedman/.vim/bundle'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/danielfriedman/.vim_macros'
+let g:netrw_dirhist_2='/Users/danielfriedman/.vim'

@@ -18,7 +18,7 @@ let g:Powerline_colorscheme = 'solarized256'
 
 " Syntastic
 let g:syntastic_python_checker="flake8"
-let g:syntastic_check_on_open=1
+"let g:syntastic_check_on_open=1
 
 " NERDcommenter
 let g:NERDRemoveExtraSpaces=1
@@ -50,6 +50,7 @@ set splitbelow " split windows open below current window
 set textwidth=79 " max. width of text being inserted
 set scrolloff=5 " scrolling starts 5 lines from top or bottom of page
 set laststatus=2 " always show status bar
+set cursorline " get line highlighted
 " formatting
 set formatoptions+=c " Auto-wrap text using textwidth
 set formatoptions+=r " Auto-insert current comment leader on next line
@@ -58,8 +59,8 @@ set formatoptions+=q " Lets you format comments with gq
 set formatoptions+=n " recognizes numbered lists when formatting text
 set formatoptions+=2 " keeps indenting on different lines
 set foldmethod=syntax
-set foldnestmax=1
-"set nofoldenable
+set foldnestmax=2
+set nofoldenable
 "set equalprg=indent\ -kr\ -nut "\ -prs " '=' command uses 'indent' unix prog to format code
 let honorcode='I affirm that I have adhered to the Honor Code in this assignment.'
 "TODO: implement echoing honorcode on <Leader>hc
@@ -69,7 +70,7 @@ set expandtab             " This makes them all spaces.
 set shiftwidth=4          " autoindent n spaces (not 8) (shiftwidth)
 set softtabstop=4         " Let's have better tabbing (never change tab size!)
 set backspace=2           " allow backspacing over everything in insert mode
-set cinkeys=0{,0},0),0#,;,:,o,O,e " For emacs-like indenting (w/ cindent)
+set cinkeys=!<Tab>,0{,0},0),0#,;,:,o,O,e " For emacs-like indenting (w/ cindent)
 set indentkeys=o,O,:,0#,e " For emacs-like indenting (w/ cindent)
 filetype plugin indent on " sets indentation based on file type
 
@@ -104,6 +105,25 @@ inoremap <C-Space> <C-x><C-o>
 " PLUGIN remaps
 map <Leader>n :NERDTreeToggle<CR>
 map <Leader>cc <plug>NERDCommenterToggle
+nnoremap <Leader>t :TagbarToggle<CR>
+
+" better highlighting
+nnoremap / :set hlsearch<CR>/
+nnoremap ? :set hlsearch<CR>?
+vnoremap / :set hlsearch<CR>/
+vnoremap ? :set hlsearch<CR>?
+
+nnoremap n :set hlsearch<CR>n
+nnoremap N :set hlsearch<CR>N
+vnoremap n :set hlsearch<CR>n
+vnoremap N :set hlsearch<CR>N
+
+nnoremap i :set nohlsearch<CR>i
+nnoremap I :set nohlsearch<CR>I
+nnoremap a :set nohlsearch<CR>a
+nnoremap A :set nohlsearch<CR>A
+nnoremap o :set nohlsearch<CR>o
+nnoremap O :set nohlsearch<CR>O
 
 " }}}
 
@@ -119,14 +139,17 @@ autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
 autocmd BufRead,BufEnter *.py source ~/.vim_macros/pydoc-functions.vim
 
 " good for editing text files - Auto-formats paragraphs as they're changed
-autocmd BufRead,BufEnter,BufNewFile *.txt set formatoptions+=a
-" autocmd BufRead,BufEnter,BufNewFile README set formatoptions+=a
+"autocmd BufRead,BufEnter,BufNewFile *.txt set formatoptions+=a autocmd
+"BufRead,BufEnter,BufNewFile README set formatoptions+=a
 
 " OMNICOMPLETION
 " from http://blog.fluther.com/django-vim/
 " must run "DJANGO_SETTINGS_FILE=myapp.settings vim" to work
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-" autocmd FileType python set omnifunc=pysmell#Complete
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" autocmd FileType python setlocal omnifunc=pysmell#Complete
+
+" COMPILING
+autocmd FIletype java setlocal makeprg=javac\ %
 
 " }}}
 
