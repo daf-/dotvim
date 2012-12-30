@@ -24,6 +24,9 @@ let g:syntastic_python_checker="flake8"
 let g:NERDRemoveExtraSpaces=1
 let g:NERDSpaceDelims=1
 
+" SnipMate
+let g:snips_author = 'Daniel Friedman'
+
 " }}}
 
 " COLOR, EDITING, REMAPS, FORMATTING {{{
@@ -62,17 +65,16 @@ set foldmethod=syntax
 set foldnestmax=2
 set nofoldenable
 "set equalprg=indent\ -kr\ -nut "\ -prs " '=' command uses 'indent' unix prog to format code
-let honorcode='I affirm that I have adhered to the Honor Code in this assignment.'
-"TODO: implement echoing honorcode on <Leader>hc
+
 " editing
-set autoindent            " always set autoindenting on
-set expandtab             " This makes them all spaces.
-set shiftwidth=4          " autoindent n spaces (not 8) (shiftwidth)
-set softtabstop=4         " Let's have better tabbing (never change tab size!)
-set backspace=2           " allow backspacing over everything in insert mode
-set cinkeys=!<Tab>,0{,0},0),0#,;,:,o,O,e " For emacs-like indenting (w/ cindent)
-set indentkeys=o,O,:,0#,e " For emacs-like indenting (w/ cindent)
-filetype plugin indent on " sets indentation based on file type
+set autoindent                      " always set autoindenting on
+set expandtab                       " This makes them all spaces.
+set shiftwidth=4                    " autoindent n spaces (not 8) (shiftwidth)
+set softtabstop=4                   " Let's have better tabbing (never change tab size!)
+set backspace=2                     " allow backspacing over everything in insert mode
+set cinkeys=0{,0},0),0#,;,:,o,O,e   " when to re-indent the current line in C languages
+set indentkeys=o,O,:,0#,e           " when to re-indent the current line in non-C languages
+filetype plugin indent on           " sets indentation based on file type
 
 " searching
 set ignorecase          " search without caring of case
@@ -106,12 +108,13 @@ inoremap <C-Space> <C-x><C-o>
 map <Leader>n :NERDTreeToggle<CR>
 map <Leader>cc <plug>NERDCommenterToggle
 nnoremap <Leader>t :TagbarToggle<CR>
+map <Leader>hc :r ~/.vim/honorcode.txt<CR>
 
 " better highlighting
-nnoremap / :set hlsearch<CR>/
-nnoremap ? :set hlsearch<CR>?
-vnoremap / :set hlsearch<CR>/
-vnoremap ? :set hlsearch<CR>?
+nnoremap / :set nohlsearch<CR>/
+nnoremap ? :set nohlsearch<CR>?
+vnoremap / :set nohlsearch<CR>/
+vnoremap ? :set nohlsearch<CR>?
 
 nnoremap n :set hlsearch<CR>n
 nnoremap N :set hlsearch<CR>N
