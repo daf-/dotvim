@@ -31,3 +31,6 @@
 [submodule "bundle/tagbar"]
 	path = bundle/tagbar
 	url = https://github.com/majutsushi/tagbar
+[submodule "bundle/golden-ratio"]
+	path = bundle/golden-ratio
+	url = https://github.com/roman/golden-ratio.git
