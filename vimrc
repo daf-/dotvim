@@ -1,8 +1,29 @@
 " vim: set fdm=marker:
 set nocompatible
 
-" PLUGINS
-call pathogen#infect()
+" VUNDLE {{{
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+Bundle 'kien/ctrlp.vim.git'
+Bundle 'vim-scripts/golden-ratio'
+Bundle 'scrooloose/nerdcommenter'
+Bundle 'scrooloose/nerdtree'
+Bundle 'sbl/scvim'
+Bundle 'scrooloose/syntastic'
+Bundle 'majutsushi/tagbar'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'tpope/vim-fugitive'
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'tpope/vim-surround'
+" snipmate
+Bundle 'gmarik/vundle'
+Bundle 'MarcWeber/vim-addon-mw-utils'
+Bundle 'tomtom/tlib_vim'
+Bundle 'honza/snipmate-snippets'
+Bundle 'garbas/vim-snipmate'
+
+" }}}
 
 " plugin settings {{{
 
@@ -37,10 +58,7 @@ let g:ctrlp_custom_ignore = {
 
 " }}}
 
-" COLOR, EDITING, REMAPS, FORMATTING {{{
-" --------------------------------------
-
-" color, appearance
+" Color, font {{{
 syntax on
 if has('gui_running')
     colorscheme solarized
@@ -52,8 +70,9 @@ else
     colorscheme solarized
 endif
 
+" }}}
 
-" editing
+" editing {{{
 set number " line numbers
 set mouse=a " can use mouse
 set go-=T " hide MacVim toolbar
@@ -62,7 +81,17 @@ set textwidth=79 " max. width of text being inserted
 set scrolloff=5 " scrolling starts 5 lines from top or bottom of page
 set laststatus=2 " always show status bar
 set cursorline " get line highlighted
-" formatting
+set autoindent                      " always set autoindenting on
+set expandtab                       " This makes them all spaces.
+set shiftwidth=4                    " autoindent n spaces (not 8) (shiftwidth)
+set softtabstop=4                   " Let's have better tabbing (never change tab size!)
+set backspace=2                     " allow backspacing over everything in insert mode
+set cinkeys=0{,0},0),0#,;,:,o,O,e   " when to re-indent the current line in C languages
+set indentkeys=o,O,:,0#,e           " when to re-indent the current line in non-C languages
+filetype plugin indent on           " sets indentation based on file type
+" }}}
+
+" formatting {{{
 set formatoptions+=c " Auto-wrap text using textwidth
 set formatoptions+=r " Auto-insert current comment leader on next line
 set formatoptions+=o " Same as above, but when you hit o/O
@@ -73,18 +102,9 @@ set foldmethod=syntax
 set foldnestmax=1
 set nofoldenable
 "set equalprg=indent\ -kr\ -nut "\ -prs " '=' command uses 'indent' unix prog to format code
+" }}}
 
-" editing
-set autoindent                      " always set autoindenting on
-set expandtab                       " This makes them all spaces.
-set shiftwidth=4                    " autoindent n spaces (not 8) (shiftwidth)
-set softtabstop=4                   " Let's have better tabbing (never change tab size!)
-set backspace=2                     " allow backspacing over everything in insert mode
-set cinkeys=0{,0},0),0#,;,:,o,O,e   " when to re-indent the current line in C languages
-set indentkeys=o,O,:,0#,e           " when to re-indent the current line in non-C languages
-filetype plugin indent on           " sets indentation based on file type
-
-" searching
+" searching {{{
 set ignorecase          " search without caring of case
 set smartcase           " only ignore case when lowercase
 set incsearch           " show matches as they occur
@@ -93,7 +113,26 @@ set laststatus=2        " always show the status bar
 set ruler               " always show location information
 set showmatch           " show matching paren
 
-" remaps
+" better highlighting
+nnoremap / :set nohlsearch<CR>/
+nnoremap ? :set nohlsearch<CR>?
+vnoremap / :set nohlsearch<CR>/
+vnoremap ? :set nohlsearch<CR>?
+
+nnoremap n :set hlsearch<CR>n
+nnoremap N :set hlsearch<CR>N
+vnoremap n :set hlsearch<CR>n
+vnoremap N :set hlsearch<CR>N
+
+nnoremap i :set nohlsearch<CR>i
+nnoremap I :set nohlsearch<CR>I
+nnoremap a :set nohlsearch<CR>a
+nnoremap A :set nohlsearch<CR>A
+nnoremap o :set nohlsearch<CR>o
+nnoremap O :set nohlsearch<CR>O
+" }}}
+
+" remaps {{{
 let mapleader=","
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -117,31 +156,9 @@ map <Leader>n :NERDTreeToggle<CR>
 map <Leader>cc <plug>NERDCommenterToggle
 nnoremap <Leader>t :TagbarToggle<CR>
 map <Leader>hc :r ~/.vim/honorcode.txt<CR>
-
-" better highlighting
-nnoremap / :set nohlsearch<CR>/
-nnoremap ? :set nohlsearch<CR>?
-vnoremap / :set nohlsearch<CR>/
-vnoremap ? :set nohlsearch<CR>?
-
-nnoremap n :set hlsearch<CR>n
-nnoremap N :set hlsearch<CR>N
-vnoremap n :set hlsearch<CR>n
-vnoremap N :set hlsearch<CR>N
-
-nnoremap i :set nohlsearch<CR>i
-nnoremap I :set nohlsearch<CR>I
-nnoremap a :set nohlsearch<CR>a
-nnoremap A :set nohlsearch<CR>A
-nnoremap o :set nohlsearch<CR>o
-nnoremap O :set nohlsearch<CR>O
-
-" nnoremap <Esc> :set nohlsearch<CR><Esc>
-
 " }}}
 
-" AUTOCMDS, FILETYPE OPTIONS {{{
-" --------------------------
+" autocmds, filetype options {{{
 
 " compiling
 autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -166,8 +183,7 @@ autocmd FIletype java setlocal makeprg=javac\ %
 
 " }}}
 
-"     MISC {{{
-" ____________
+" misc {{{
 
 " make autocomplete AWESOME
 set wildmenu
@@ -197,7 +213,6 @@ map <Leader>b <Esc>:tabnew ~/.bash_profile<CR>
 " }}}
 
 " Ben Kuperman -- mostly macros {{{
-" -----------------------------
 
 " I Make a bunch of text headlines
 map! <Leader>ul <esc>:let @h=@/<cr>yypV:s/^[ ]*//<CR>V:s/./-/g<cr>:let @/=@h<CR>kJi<CR><esc>o
