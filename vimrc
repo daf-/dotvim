@@ -207,8 +207,8 @@ cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 set pumheight=5         " max number of things to show in pop-up-menu
 " avoid "press enter to continue" screens
 "set cmdheight=2
-map <Leader>v <Esc>:tabnew ~/.vimrc<CR>
-map <Leader>b <Esc>:tabnew ~/.bash_profile<CR>
+nnoremap <Leader>v :tabnew ~/.vim/vimrc<CR>
+nnoremap <Leader>b :tabnew ~/.bash_profile<CR>
 
 " }}}
 
