@@ -1,5 +1,5 @@
-" vim: set fdm=marker:
 set nocompatible
+" TODO: why isn't syntastic working with python?? flake8 isn't working...
 
 " VUNDLE {{{
 set rtp+=~/.vim/bundle/vundle/
@@ -30,7 +30,7 @@ Bundle 'garbas/vim-snipmate'
 " load filetype plugins
 filetype plugin on
 
-let NERDTreeIgnore=['\.pyc$']
+let NERDTreeIgnore = ['\.class$', '\~$', '\.o$', '\.obj$', '\.pyc$', '\.wav$']
 
 " make powerline use solarized colors
 set encoding=utf-8
@@ -38,8 +38,7 @@ let g:Powerline_symbols = 'fancy'
 let g:Powerline_colorscheme = 'solarized256'
 
 " Syntastic
-let g:syntastic_python_checker="flake8"
-"let g:syntastic_check_on_open=1
+" let g:syntastic_python_checker = 'flake8'
 
 " NERDcommenter
 let g:NERDRemoveExtraSpaces=1
@@ -58,7 +57,7 @@ let g:ctrlp_custom_ignore = {
 
 " }}}
 
-" Color, font {{{
+" color, font {{{
 syntax on
 if has('gui_running')
     colorscheme solarized
@@ -69,6 +68,8 @@ else
     set bg=dark
     colorscheme solarized
 endif
+set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
+set list
 
 " }}}
 
@@ -100,7 +101,7 @@ set formatoptions+=n " recognizes numbered lists when formatting text
 set formatoptions+=2 " keeps indenting on different lines
 set foldmethod=syntax
 set foldnestmax=1
-set nofoldenable
+"set nofoldenable
 "set equalprg=indent\ -kr\ -nut "\ -prs " '=' command uses 'indent' unix prog to format code
 " }}}
 
@@ -138,14 +139,16 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
+nnoremap <S-l> :tabnext<CR>
+nnoremap <S-h> :tabprevious<CR>
 inoremap kj <Esc>
 inoremap jk <Esc>
 nnoremap ; :
 vnoremap ; :
 nnoremap <Space> za
 vnoremap <Space> za
-nnoremap <Tab> ^=$
-vnoremap <Tab> ^=
+nnoremap <Tab> ==
+vnoremap <Tab> =
 map Y y$ " makes Y yank till end of line
 nnoremap j gj
 nnoremap k gk
@@ -153,7 +156,7 @@ inoremap <C-@> <C-x><C-o>
 inoremap <C-Space> <C-x><C-o>
 " PLUGIN remaps
 map <Leader>n :NERDTreeToggle<CR>
-map <Leader>cc <plug>NERDCommenterToggle
+map <Leader>cc <plug>NERDCommenterToggle " TODO: why isn't this working?
 nnoremap <Leader>t :TagbarToggle<CR>
 map <Leader>hc :r ~/.vim/honorcode.txt<CR>
 " }}}
@@ -188,6 +191,10 @@ autocmd FIletype java setlocal makeprg=javac\ %
 " make autocomplete AWESOME
 set wildmenu
 set wildignore=*.o,*.obj,*.pyc,*.class
+
+" no beeping, please
+set visualbell t_vb=
+set novisualbell
 
 " reload .vimrc whenever saved -- from https://gist.github.com/1988620
 augroup AutoReloadVimRC
@@ -287,3 +294,4 @@ if has("cscope")
 endif
 
 " }}}
+" vim: set fdm=marker:
