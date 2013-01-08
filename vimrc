@@ -16,6 +16,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-git'
 " snipmate
 Bundle 'gmarik/vundle'
 Bundle 'MarcWeber/vim-addon-mw-utils'
@@ -34,7 +35,7 @@ let NERDTreeIgnore = ['\.class$', '\~$', '\.o$', '\.obj$', '\.pyc$', '\.wav$']
 
 " make powerline use solarized colors
 set encoding=utf-8
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
 let g:Powerline_colorscheme = 'solarized256'
 
 " Syntastic
@@ -54,6 +55,7 @@ let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
     \ 'file': '\.exe$\|\.so$\|\.dat$'
     \ }
+let g:solarized_termcolors=256
 
 " }}}
 
@@ -169,7 +171,7 @@ autocmd QuickFixCmdPost    l* nested lwindow
 
 " lets me have man pages in their own window and syntax colored
 autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
-autocmd BufRead,BufEnter *.py source ~/.vim_macros/pydoc-functions.vim
+" autocmd BufRead,BufEnter *.py source ~/.vim_macros/pydoc-functions.vim
 
 " good for editing text files - Auto-formats paragraphs as they're changed
 "autocmd BufRead,BufEnter,BufNewFile *.txt set formatoptions+=a autocmd
