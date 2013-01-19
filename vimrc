@@ -6,7 +6,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 Bundle 'kien/ctrlp.vim.git'
-Bundle 'vim-scripts/golden-ratio'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sbl/scvim'
@@ -70,8 +69,8 @@ else
     set bg=dark
     colorscheme solarized
 endif
-set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
-set list
+" set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
+" set list
 
 " }}}
 
