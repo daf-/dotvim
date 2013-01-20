@@ -61,6 +61,7 @@ let g:solarized_termcolors=256
 " color, font {{{
 syntax on
 if has('gui_running')
+    set bg=dark
     colorscheme solarized
     if has("mac")
         set guifont=Menlo\ for\ Powerline\:h11
@@ -155,6 +156,7 @@ nnoremap j gj
 nnoremap k gk
 inoremap <C-@> <C-x><C-o>
 inoremap <C-Space> <C-x><C-o>
+nnoremap <Leader>s :w<CR>
 " PLUGIN remaps
 map <Leader>n :NERDTreeToggle<CR>
 map <Leader>cc <plug>NERDCommenterToggle " TODO: why isn't this working?
@@ -163,6 +165,13 @@ map <Leader>hc :r ~/.vim/honorcode.txt<CR>
 " }}}
 
 " autocmds, filetype options {{{
+
+" reload .vimrc whenever saved -- from https://gist.github.com/1988620
+augroup AutoReloadVimRC
+  au!
+  " automatically reload vimrc when it's saved
+  au BufWritePost ~/.vim/vimrc so $MYVIMRC
+augroup END
 
 " compiling
 autocmd QuickFixCmdPost [^l]* nested cwindow
@@ -196,13 +205,6 @@ set wildignore=*.o,*.obj,*.pyc,*.class
 " no beeping, please
 set visualbell t_vb=
 set novisualbell
-
-" reload .vimrc whenever saved -- from https://gist.github.com/1988620
-augroup AutoReloadVimRC
-  au!
-  " automatically reload vimrc when it's saved
-  au BufWritePost $MYVIMRC so $MYVIMRC
-augroup END
 
 " from http://stackoverflow.com/questions/5793294/vim-cr-mapping-not-working
 " Automatically cd into the directory that the file is in
