@@ -34,8 +34,8 @@ let NERDTreeIgnore = ['\.class$', '\~$', '\.o$', '\.obj$', '\.pyc$', '\.wav$']
 
 " make powerline use solarized colors
 set encoding=utf-8
-" let g:Powerline_symbols = 'fancy'
-let g:Powerline_colorscheme = 'solarized256'
+let g:Powerline_symbols = 'fancy'
+" let g:Powerline_colorscheme = 'solarized256'
 
 " Syntastic
 " let g:syntastic_python_checker = 'flake8'
@@ -67,8 +67,8 @@ if has('gui_running')
         set guifont=Menlo\ for\ Powerline\:h11
     endif
 else
-    set bg=dark
-    colorscheme solarized
+    " set bg=dark
+    colorscheme Tomorrow-Night
 endif
 " set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 " set list
