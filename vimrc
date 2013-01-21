@@ -5,7 +5,8 @@ set nocompatible
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'kien/ctrlp.vim.git'
+Bundle 'gmarik/vundle'
+Bundle 'kien/ctrlp.vim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
 Bundle 'sbl/scvim'
@@ -16,12 +17,13 @@ Bundle 'tpope/vim-fugitive'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-git'
+Bundle 'SirVer/ultisnips'
 " snipmate
-Bundle 'gmarik/vundle'
-Bundle 'MarcWeber/vim-addon-mw-utils'
-Bundle 'tomtom/tlib_vim'
-Bundle 'honza/snipmate-snippets'
-Bundle 'garbas/vim-snipmate'
+" Bundle 'gmarik/vundle'
+" Bundle 'MarcWeber/vim-addon-mw-utils'
+" Bundle 'tomtom/tlib_vim'
+" Bundle 'honza/snipmate-snippets'
+" Bundle 'garbas/vim-snipmate'
 
 " }}}
 
@@ -38,14 +40,11 @@ let g:Powerline_symbols = 'fancy'
 " let g:Powerline_colorscheme = 'solarized256'
 
 " Syntastic
-" let g:syntastic_python_checker = 'flake8'
+let g:syntastic_python_checker = 'flake8'
 
 " NERDcommenter
 let g:NERDRemoveExtraSpaces=1
 let g:NERDSpaceDelims=1
-
-" SnipMate
-let g:snips_author = 'Daniel Friedman'
 
 " Ctrl-p
 " from https://gist.github.com/67de417c5c38f0ff8093
@@ -55,6 +54,11 @@ let g:ctrlp_custom_ignore = {
     \ 'file': '\.exe$\|\.so$\|\.dat$'
     \ }
 let g:solarized_termcolors=256
+
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " }}}
 
@@ -170,7 +174,7 @@ map <Leader>hc :r ~/.vim/honorcode.txt<CR>
 augroup AutoReloadVimRC
   au!
   " automatically reload vimrc when it's saved
-  au BufWritePost ~/.vim/vimrc so $MYVIMRC
+  au BufWritePost $MYVIMRC so $MYVIMRC
 augroup END
 
 " compiling
