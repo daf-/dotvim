@@ -1,4 +1,5 @@
 set nocompatible
+filetype off
 
 " VUNDLE {{{
 set rtp+=~/.vim/bundle/vundle/
@@ -25,6 +26,7 @@ Bundle 'tpope/vim-surround'
 
 " load filetype plugins
 filetype plugin on
+filetype plugin indent on
 
 let NERDTreeIgnore = ['\.class$', '\~$', '\.o$', '\.obj$', '\.pyc$', '\.wav$']
 
@@ -92,7 +94,6 @@ set softtabstop=4                   " Let's have better tabbing (never change ta
 set backspace=2                     " allow backspacing over everything in insert mode
 set cinkeys=0{,0},0),0#,;,:,o,O,e   " when to re-indent the current line in C languages
 set indentkeys=o,O,:,0#,e           " when to re-indent the current line in non-C languages
-filetype plugin indent on           " sets indentation based on file type
 " }}}
 
 " formatting {{{
