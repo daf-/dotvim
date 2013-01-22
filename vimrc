@@ -4,25 +4,20 @@ set nocompatible
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
+Bundle 'Lokaltog/vim-powerline'
+Bundle 'SirVer/ultisnips'
+Bundle 'altercation/vim-colors-solarized'
+Bundle 'ervandew/supertab'
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
+Bundle 'majutsushi/tagbar'
+Bundle 'sbl/scvim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
-Bundle 'sbl/scvim'
 Bundle 'scrooloose/syntastic'
-Bundle 'majutsushi/tagbar'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'tpope/vim-fugitive'
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-git'
-Bundle 'SirVer/ultisnips'
-" snipmate
-" Bundle 'gmarik/vundle'
-" Bundle 'MarcWeber/vim-addon-mw-utils'
-" Bundle 'tomtom/tlib_vim'
-" Bundle 'honza/snipmate-snippets'
-" Bundle 'garbas/vim-snipmate'
+Bundle 'tpope/vim-surround'
 
 " }}}
 
@@ -68,6 +63,8 @@ if has('gui_running')
     colorscheme solarized
     if has("mac")
         set guifont=Menlo\ for\ Powerline\:h11
+    elseif has("unix")
+        set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
     endif
 else
     " set bg=dark
@@ -79,6 +76,7 @@ endif
 " }}}
 
 " editing {{{
+set hidden
 set number " line numbers
 set mouse=a " can use mouse
 set go-=T " hide MacVim toolbar
