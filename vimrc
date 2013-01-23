@@ -4,13 +4,13 @@ filetype off
 " VUNDLE {{{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
+Bundle 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'SirVer/ultisnips'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
 Bundle 'ervandew/supertab'
-Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'sbl/scvim'
