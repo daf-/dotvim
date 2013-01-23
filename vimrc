@@ -35,6 +35,8 @@ let g:Powerline_symbols = 'fancy'
 
 " Syntastic
 let g:syntastic_python_checker = 'flake8'
+let g:syntastic_error_symbol='✗'    " from syntastic manual
+let g:syntastic_warning_symbol='⚠'  " from syntastic manual
 
 " NERDcommenter
 let g:NERDRemoveExtraSpaces=1
