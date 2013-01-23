@@ -8,13 +8,13 @@ call vundle#rc()
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'SirVer/ultisnips'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
 Bundle 'ervandew/supertab'
 Bundle 'gmarik/vundle'
 Bundle 'kien/ctrlp.vim'
 Bundle 'majutsushi/tagbar'
 Bundle 'sbl/scvim'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
@@ -27,8 +27,6 @@ Bundle 'tpope/vim-surround'
 " load filetype plugins
 filetype plugin on
 filetype plugin indent on
-
-let NERDTreeIgnore = ['\.class$', '\~$', '\.o$', '\.obj$', '\.pyc$', '\.wav$']
 
 " make powerline use solarized colors
 set encoding=utf-8
@@ -53,8 +51,8 @@ let g:solarized_termcolors=256
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+" let g:UltiSnipsJumpForwardTrigger="<tab>"
+" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " }}}
 
@@ -90,6 +88,7 @@ set cursorline " get line highlighted
 set autoindent                      " always set autoindenting on
 set expandtab                       " This makes them all spaces.
 set shiftwidth=4                    " autoindent n spaces (not 8) (shiftwidth)
+set tabstop=4                   " Let's have better tabbing (never change tab size!)
 set softtabstop=4                   " Let's have better tabbing (never change tab size!)
 set backspace=2                     " allow backspacing over everything in insert mode
 set cinkeys=0{,0},0),0#,;,:,o,O,e   " when to re-indent the current line in C languages
@@ -160,7 +159,6 @@ inoremap <C-@> <C-x><C-o>
 inoremap <C-Space> <C-x><C-o>
 nnoremap <Leader>s :w<CR>
 " PLUGIN remaps
-map <Leader>n :NERDTreeToggle<CR>
 map <Leader>cc <plug>NERDCommenterToggle " TODO: why isn't this working?
 nnoremap <Leader>t :TagbarToggle<CR>
 map <Leader>hc :r ~/.vim/honorcode.txt<CR>
