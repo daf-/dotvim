@@ -6,12 +6,17 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
 
+
+" FuzzyFinder for locating distant files, ctrlp for projects and buffers
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+Bundle 'kien/ctrlp.vim'
+
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'SirVer/ultisnips'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
-Bundle 'ervandew/supertab'
-Bundle 'kien/ctrlp.vim'
+Bundle 'inkpot'
 Bundle 'majutsushi/tagbar'
 Bundle 'sbl/scvim'
 Bundle 'scrooloose/nerdcommenter'
@@ -28,10 +33,9 @@ Bundle 'tpope/vim-surround'
 filetype plugin on
 filetype plugin indent on
 
-" make powerline use solarized colors
+" Powerline
 set encoding=utf-8
 let g:Powerline_symbols = 'fancy'
-" let g:Powerline_colorscheme = 'solarized256'
 
 " Syntastic
 let g:syntastic_python_checker = 'flake8'
@@ -45,10 +49,10 @@ let g:NERDSpaceDelims=1
 " Ctrl-p
 " from https://gist.github.com/67de417c5c38f0ff8093
 " Sane Ignore For ctrlp
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-    \ 'file': '\.exe$\|\.so$\|\.dat$'
-    \ }
+" let g:ctrlp_custom_ignore = {
+    " \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+    " \ 'file': '\.exe$\|\.so$\|\.dat$'
+    " \ }
 let g:solarized_termcolors=256
 
 " UltiSnips
@@ -164,6 +168,11 @@ nnoremap <Leader>s :w<CR>
 map <Leader>cc <plug>NERDCommenterToggle " TODO: why isn't this working?
 nnoremap <Leader>t :TagbarToggle<CR>
 map <Leader>hc :r ~/.vim/honorcode.txt<CR>
+nnoremap <Leader>f :FufFile<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
+" leader macros
+nnoremap <Leader>s :w<CR>
+nnoremap <Leader>q :q<CR>
 " }}}
 
 " autocmds, filetype options {{{
@@ -216,7 +225,7 @@ cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 
 " quick-fix window
 " ----------------
-set pumheight=5         " max number of things to show in pop-up-menu
+set pumheight=15         " max number of things to show in pop-up-menu
 " avoid "press enter to continue" screens
 "set cmdheight=2
 nnoremap <Leader>v :tabnew ~/.vim/vimrc<CR>
