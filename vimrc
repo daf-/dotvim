@@ -11,12 +11,12 @@ Bundle 'gmarik/vundle'
 Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'kien/ctrlp.vim'
-
-Bundle 'Lokaltog/vim-powerline'
-Bundle 'SirVer/ultisnips'
+" colors
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'daylerees/colour-schemes', { "rtp": "vim-themes/" }
 Bundle 'inkpot'
+Bundle 'nanotech/jellybeans.vim'
+" programming
+Bundle 'SirVer/ultisnips'
 Bundle 'majutsushi/tagbar'
 Bundle 'sbl/scvim'
 Bundle 'scrooloose/nerdcommenter'
@@ -35,7 +35,8 @@ filetype plugin indent on
 
 " Powerline
 set encoding=utf-8
-let g:Powerline_symbols = 'fancy'
+" let g:Powerline_symbols = 'fancy'
+" let g:Powerline_stl_path_style = 'short'
 
 " Syntastic
 let g:syntastic_python_checker = 'flake8'
@@ -53,12 +54,12 @@ let g:NERDSpaceDelims=1
     " \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
     " \ 'file': '\.exe$\|\.so$\|\.dat$'
     " \ }
-let g:solarized_termcolors=256
+" let g:solarized_termcolors=256
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<tab>"
-" let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " }}}
 
@@ -70,14 +71,22 @@ if has('gui_running')
     if has("mac")
         set guifont=Menlo\ for\ Powerline\:h11
     elseif has("unix")
-        set guifont=Ubuntu\ Mono\ for\ Powerline\ 12
+        set guifont=Ubuntu\ Mono\ for\ Powerline\ 13
     endif
 else
     " set bg=dark
-    colorscheme Tomorrow-Night
+    colorscheme jellybeans
 endif
 " set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 " set list
+
+" }}}
+
+" statusline {{{
+
+" see https://wincent.com/wiki/Set_the_Vim_statusline
+set laststatus=2        " always show the status bar
+set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%Y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
 
 " }}}
 
@@ -89,7 +98,6 @@ set go-=T " hide MacVim toolbar
 set splitbelow " split windows open below current window
 set textwidth=79 " max. width of text being inserted
 set scrolloff=5 " scrolling starts 5 lines from top or bottom of page
-set laststatus=2 " always show status bar
 set cursorline " get line highlighted
 set autoindent                      " always set autoindenting on
 set expandtab                       " This makes them all spaces.
@@ -119,31 +127,34 @@ set ignorecase          " search without caring of case
 set smartcase           " only ignore case when lowercase
 set incsearch           " show matches as they occur
 set pastetoggle=<F5>    " used for pasting in data
-set laststatus=2        " always show the status bar
 set ruler               " always show location information
 set showmatch           " show matching paren
 
 " better highlighting
-nnoremap / :set nohlsearch<CR>/
-nnoremap ? :set nohlsearch<CR>?
-vnoremap / :set nohlsearch<CR>/
-vnoremap ? :set nohlsearch<CR>?
+" nnoremap / :set nohlsearch<CR>/
+" nnoremap ? :set nohlsearch<CR>?
+" vnoremap / :set nohlsearch<CR>/
+" vnoremap ? :set nohlsearch<CR>?
 
-nnoremap n :set hlsearch<CR>n
-nnoremap N :set hlsearch<CR>N
-vnoremap n :set hlsearch<CR>n
-vnoremap N :set hlsearch<CR>N
+" nnoremap n :set hlsearch<CR>n
+" nnoremap N :set hlsearch<CR>N
+" vnoremap n :set hlsearch<CR>n
+" vnoremap N :set hlsearch<CR>N
 
-nnoremap i :set nohlsearch<CR>i
-nnoremap I :set nohlsearch<CR>I
-nnoremap a :set nohlsearch<CR>a
-nnoremap A :set nohlsearch<CR>A
-nnoremap o :set nohlsearch<CR>o
-nnoremap O :set nohlsearch<CR>O
+" nnoremap i :set nohlsearch<CR>i
+" nnoremap I :set nohlsearch<CR>I
+" nnoremap a :set nohlsearch<CR>a
+" nnoremap A :set nohlsearch<CR>A
+" nnoremap o :set nohlsearch<CR>o
+" nnoremap O :set nohlsearch<CR>O
 " }}}
 
 " remaps {{{
 let mapleader=","
+nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
@@ -152,12 +163,8 @@ nnoremap <S-l> :tabnext<CR>
 nnoremap <S-h> :tabprevious<CR>
 inoremap kj <Esc>
 inoremap jk <Esc>
-nnoremap ; :
-vnoremap ; :
 nnoremap <Space> za
 vnoremap <Space> za
-nnoremap <Tab> ==
-vnoremap <Tab> =
 map Y y$ " makes Y yank till end of line
 nnoremap j gj
 nnoremap k gk
@@ -165,7 +172,7 @@ inoremap <C-@> <C-x><C-o>
 inoremap <C-Space> <C-x><C-o>
 nnoremap <Leader>s :w<CR>
 " PLUGIN remaps
-map <Leader>cc <plug>NERDCommenterToggle " TODO: why isn't this working?
+map <Leader>cc <plug>NERDCommenterToggle
 nnoremap <Leader>t :TagbarToggle<CR>
 map <Leader>hc :r ~/.vim/honorcode.txt<CR>
 nnoremap <Leader>f :FufFile<CR>
@@ -173,6 +180,7 @@ nnoremap <Leader>b :CtrlPBuffer<CR>
 " leader macros
 nnoremap <Leader>s :w<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>g :Gstatus<CR>
 " }}}
 
 " autocmds, filetype options {{{
@@ -185,25 +193,41 @@ augroup AutoReloadVimRC
 augroup END
 
 " compiling
-autocmd QuickFixCmdPost [^l]* nested cwindow
-autocmd QuickFixCmdPost    l* nested lwindow
+augroup compilation
+    autocmd!
+    autocmd QuickFixCmdPost [^l]* nested cwindow
+    autocmd QuickFixCmdPost    l* nested lwindow
+    autocmd Filetype java setlocal makeprg=javac\ %
+augroup END
 
 " lets me have man pages in their own window and syntax colored
-autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
-" autocmd BufRead,BufEnter *.py source ~/.vim_macros/pydoc-functions.vim
+augroup doc
+    autocmd!
+    autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
+augroup END
 
-" good for editing text files - Auto-formats paragraphs as they're changed
-"autocmd BufRead,BufEnter,BufNewFile *.txt set formatoptions+=a autocmd
-"BufRead,BufEnter,BufNewFile README set formatoptions+=a
+" http://blog.fluther.com/django-vim/
+augroup python
+    autocmd!
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+augroup END
 
-" OMNICOMPLETION
-" from http://blog.fluther.com/django-vim/
-" must run "DJANGO_SETTINGS_FILE=myapp.settings vim" to work
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" autocmd FileType python setlocal omnifunc=pysmell#Complete
+augroup filetype_vim
+    autocmd!
+    autocmd FileType vim setlocal foldmethod=marker
+    " always use case-sensitive comparison, but don't screw up ==?
+    autocmd Filetype vim setlocal iskeyword+=?
+    autocmd FileType vim iabbrev <buffer> == ==#
+    autocmd FileType vim iabbrev <buffer> > >#
+    autocmd FileType vim iabbrev <buffer> < <#
+augroup END
 
-" COMPILING
-autocmd FIletype java setlocal makeprg=javac\ %
+augroup auto_chdir
+    autocmd!
+    " from http://stackoverflow.com/questions/5793294/vim-cr-mapping-not-working
+    " Automatically cd into the directory that the file is in
+    autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
+augroup END
 
 " }}}
 
@@ -217,9 +241,6 @@ set wildignore=*.o,*.obj,*.pyc,*.class
 set visualbell t_vb=
 set novisualbell
 
-" from http://stackoverflow.com/questions/5793294/vim-cr-mapping-not-working
-" Automatically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 " insert current path into command prompt
 cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 
@@ -228,7 +249,7 @@ cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 set pumheight=15         " max number of things to show in pop-up-menu
 " avoid "press enter to continue" screens
 "set cmdheight=2
-nnoremap <Leader>v :tabnew ~/.vim/vimrc<CR>
+nnoremap <Leader>v :e ~/.vimrc<CR>
 
 " }}}
 
@@ -252,19 +273,18 @@ map! <Leader>sdate <cr><esc>k:r!date +"\%m/\%d/\%y"<cr>kJJi
 set dictionary=/usr/share/dict/words
 if v:version >= 700
     " Stuff for tabs
-    hi TabLineSel ctermbg=blue ctermfg=white cterm=bold
-    hi TabLine    cterm=reverse ctermfg=darkgray ctermbg=white
-    hi TabLineFill ctermbg=darkgray ctermfg=darkgray
+    " hi TabLineSel ctermbg=blue ctermfg=white cterm=bold
+    " hi TabLine    cterm=reverse ctermfg=darkgray ctermbg=white
+    " hi TabLineFill ctermbg=darkgray ctermfg=darkgray
 
     " color fixes
-    highlight MatchParen ctermbg=blue
+    " highlight MatchParen ctermbg=blue
     "highlight PmenuSel ctermfg=black ctermbg=lightgray 
 endif
 
 if has("spell")
-    "set spell
+    " set spell
     set spelllang=en_us
-   "set spellfile=~/.vim/spell/en.latin1.add,~/.vim/spell/cs.latin1.add,~/.vim/spell/latex.latin1.add
     set sps=best,10
     
     autocmd BufRead mutt-* setlocal spell
@@ -307,4 +327,3 @@ if has("cscope")
 endif
 
 " }}}
-" vim: set fdm=marker:
