@@ -86,7 +86,7 @@ endif
 
 " see https://wincent.com/wiki/Set_the_Vim_statusline
 set laststatus=2        " always show the status bar
-set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%Y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
+set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
 
 " }}}
 
