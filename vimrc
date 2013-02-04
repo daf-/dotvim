@@ -196,7 +196,7 @@ augroup AutoReloadVimRC
     " automatically reload vimrc when it's saved
     autocmd BufWritePost $MYVIMRC so $MYVIMRC
     autocmd BufWritePost $MYVIMRC execute "syntax on"
-    autocmd BufWritePost $MYVIMRC call Pl#Load()
+    autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
 augroup END
 
 " compiling
@@ -225,8 +225,8 @@ augroup filetype_vim
     " always use case-sensitive comparison, but don't screw up ==?
     autocmd Filetype vim setlocal iskeyword+=?
     autocmd FileType vim iabbrev <buffer> == ==#
-    autocmd FileType vim iabbrev <buffer> > >#
-    autocmd FileType vim iabbrev <buffer> < <#
+    " autocmd FileType vim iabbrev <buffer> > >#
+    " autocmd FileType vim iabbrev <buffer> < <#
 augroup END
 
 augroup auto_chdir
@@ -240,7 +240,7 @@ augroup END
 " misc {{{
 
 " no beeping, please
-set visualbell
+" set visualbell
 
 " insert current path into command prompt
 cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
