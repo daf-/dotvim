@@ -12,7 +12,10 @@ Bundle 'L9'
 Bundle 'FuzzyFinder'
 Bundle 'kien/ctrlp.vim'
 " colors
+" Bundle 'Lokaltog/powerline' --> still in beta
+Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'daf-/vim-daylight'
 Bundle 'inkpot'
 Bundle 'nanotech/jellybeans.vim'
 " programming
@@ -24,19 +27,12 @@ Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
-
 " }}}
-
 " plugin settings {{{
 
 " load filetype plugins
 filetype plugin on
 filetype plugin indent on
-
-" Powerline
-set encoding=utf-8
-" let g:Powerline_symbols = 'fancy'
-" let g:Powerline_stl_path_style = 'short'
 
 " Syntastic
 let g:syntastic_python_checker = 'flake8'
@@ -50,11 +46,13 @@ let g:NERDSpaceDelims=1
 " Ctrl-p
 " from https://gist.github.com/67de417c5c38f0ff8093
 " Sane Ignore For ctrlp
-" let g:ctrlp_custom_ignore = {
-    " \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-    " \ 'file': '\.exe$\|\.so$\|\.dat$'
-    " \ }
+let g:ctrlp_custom_ignore = {
+    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+    \ 'file': '\.exe$\|\.so$\|\.dat$'
+    \ }
 " let g:solarized_termcolors=256
+
+" Powerline
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -62,53 +60,51 @@ let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " }}}
-
-" color, font {{{
+" appearance {{{
+set encoding=utf-8
 syntax on
 if has('gui_running')
     set bg=dark
     colorscheme solarized
     if has("mac")
-        set guifont=Menlo\ for\ Powerline\:h11
+        set guifont=Monaco:h13
     elseif has("unix")
         set guifont=Ubuntu\ Mono\ for\ Powerline\ 13
     endif
 else
-    " set bg=dark
     colorscheme jellybeans
 endif
 " set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 " set list
 
 " }}}
-
-" statusline {{{
-
-" see https://wincent.com/wiki/Set_the_Vim_statusline
-set laststatus=2        " always show the status bar
-set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
-
-" }}}
-
-" editing {{{
+" basic {{{
 set hidden
-set number " line numbers
-set mouse=a " can use mouse
-set go-=T " hide MacVim toolbar
-set splitbelow " split windows open below current window
-set textwidth=79 " max. width of text being inserted
-set scrolloff=5 " scrolling starts 5 lines from top or bottom of page
-set cursorline " get line highlighted
-set autoindent                      " always set autoindenting on
-set expandtab                       " This makes them all spaces.
-set shiftwidth=4                    " autoindent n spaces (not 8) (shiftwidth)
-set tabstop=4                   " Let's have better tabbing (never change tab size!)
-set softtabstop=4                   " Let's have better tabbing (never change tab size!)
-set backspace=2                     " allow backspacing over everything in insert mode
-set cinkeys=0{,0},0),0#,;,:,o,O,e   " when to re-indent the current line in C languages
-set indentkeys=o,O,:,0#,e           " when to re-indent the current line in non-C languages
+set number
+set mouse=a
+set guioptions-=T " hide toolbar
+set guioptions-=r " hide scrollbar
+set splitbelow
+set textwidth=72
+set scrolloff=5
+set autoindent
+set expandtab
+set shiftwidth=4
+set tabstop=8
+set softtabstop=4
+set backspace=2
+set cinkeys=0{,0},0),0#,;,:,o,O,e
+set indentkeys=o,O,:,0#,e
+set wildmenu
+set wildignore=*.o,*.obj,*.pyc,*.class
+set pumheight=15
 " }}}
+" statusline {{{
+" see https://wincent.com/wiki/Set_the_Vim_statusline
+set laststatus=2
+" set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
 
+" }}}
 " formatting {{{
 set formatoptions+=c " Auto-wrap text using textwidth
 set formatoptions+=r " Auto-insert current comment leader on next line
@@ -116,12 +112,16 @@ set formatoptions+=o " Same as above, but when you hit o/O
 set formatoptions+=q " Lets you format comments with gq
 set formatoptions+=n " recognizes numbered lists when formatting text
 set formatoptions+=2 " keeps indenting on different lines
-set foldmethod=syntax
-set foldnestmax=1
-"set nofoldenable
 "set equalprg=indent\ -kr\ -nut "\ -prs " '=' command uses 'indent' unix prog to format code
 " }}}
-
+" folding {{{
+nnoremap <Space> za
+vnoremap <Space> za
+set foldmethod=syntax
+set foldnestmax=1
+nnoremap <Leader><Space> zMzvzz
+"set nofoldenable
+" }}}
 " searching {{{
 set ignorecase          " search without caring of case
 set smartcase           " only ignore case when lowercase
@@ -148,41 +148,40 @@ set showmatch           " show matching paren
 " nnoremap o :set nohlsearch<CR>o
 " nnoremap O :set nohlsearch<CR>O
 " }}}
-
 " remaps {{{
 let mapleader=","
+" easier defaults {{{
+inoremap kj <Esc>
+inoremap jk <Esc>
+
 nnoremap ; :
-nnoremap : ;
 vnoremap ; :
-vnoremap : ;
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-nnoremap <S-l> :tabnext<CR>
-nnoremap <S-h> :tabprevious<CR>
-inoremap kj <Esc>
-inoremap jk <Esc>
-nnoremap <Space> za
-vnoremap <Space> za
-map Y y$ " makes Y yank till end of line
+
+nnoremap H 0
+vnoremap H 0
+nnoremap L $
+vnoremap L $
+nnoremap Y y$
 nnoremap j gj
 nnoremap k gk
-inoremap <C-@> <C-x><C-o>
-inoremap <C-Space> <C-x><C-o>
+" }}}
+" leader macros {{{
+nnoremap <Leader>; ;
 nnoremap <Leader>s :w<CR>
-" PLUGIN remaps
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>g :Gstatus<CR>
 map <Leader>cc <plug>NERDCommenterToggle
 nnoremap <Leader>t :TagbarToggle<CR>
 map <Leader>hc :r ~/.vim/honorcode.txt<CR>
 nnoremap <Leader>f :FufFile<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
-" leader macros
-nnoremap <Leader>s :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>g :Gstatus<CR>
 " }}}
-
+" }}}
 " autocmds, filetype options {{{
 
 " reload .vimrc whenever saved -- from https://gist.github.com/1988620
@@ -230,29 +229,19 @@ augroup auto_chdir
 augroup END
 
 " }}}
-
 " misc {{{
 
-" make autocomplete AWESOME
-set wildmenu
-set wildignore=*.o,*.obj,*.pyc,*.class
-
 " no beeping, please
-set visualbell t_vb=
-set novisualbell
+set visualbell
 
 " insert current path into command prompt
 cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 
 " quick-fix window
 " ----------------
-set pumheight=15         " max number of things to show in pop-up-menu
-" avoid "press enter to continue" screens
-"set cmdheight=2
 nnoremap <Leader>v :e ~/.vimrc<CR>
 
 " }}}
-
 " Ben Kuperman -- mostly macros {{{
 
 " I Make a bunch of text headlines
@@ -327,3 +316,4 @@ if has("cscope")
 endif
 
 " }}}
+" vim: set fdm=marker:
