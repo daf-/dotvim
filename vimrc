@@ -17,6 +17,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'daf-/vim-daylight'
 Bundle 'inkpot'
+Bundle 'mayansmoke'
 Bundle 'nanotech/jellybeans.vim'
 " programming
 Bundle 'SirVer/ultisnips'
@@ -45,34 +46,39 @@ let g:NERDSpaceDelims=1
 
 " Ctrl-p
 " from https://gist.github.com/67de417c5c38f0ff8093
-" Sane Ignore For ctrlp
 let g:ctrlp_custom_ignore = {
     \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
     \ 'file': '\.exe$\|\.so$\|\.dat$'
     \ }
-" let g:solarized_termcolors=256
-
-" Powerline
 
 " UltiSnips
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<tab>"
 let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
+" Solarized
+let g:solarized_termcolors=256
+
+" Daylight
+let g:daylight_morning_color_gvim = "Tomorrow"
+let g:daylight_afternoon_color_gvim = "solarized"
+let g:daylight_evening_color_gvim = "Tomorrow-Night"
+let g:daylight_late_color_gvim = "jellybeans"
+
+let g:daylight_morning_color_term = "Tomorrow"
+let g:daylight_afternoon_color_term = "mayansmoke"
+let g:daylight_evening_color_term = "Tomorrow-Night"
+let g:daylight_late_color_term = "jellybeans"
 " }}}
 " appearance {{{
 set encoding=utf-8
 syntax on
 if has('gui_running')
-    set bg=dark
-    colorscheme solarized
     if has("mac")
         set guifont=Monaco:h13
     elseif has("unix")
         set guifont=Ubuntu\ Mono\ for\ Powerline\ 13
     endif
-else
-    colorscheme jellybeans
 endif
 " set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 " set list
@@ -182,13 +188,15 @@ nnoremap <Leader>f :FufFile<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 " }}}
 " }}}
-" autocmds, filetype options {{{
+" autocmds {{{
 
 " reload .vimrc whenever saved -- from https://gist.github.com/1988620
 augroup AutoReloadVimRC
-  au!
-  " automatically reload vimrc when it's saved
-  au BufWritePost $MYVIMRC so $MYVIMRC
+    autocmd!
+    " automatically reload vimrc when it's saved
+    autocmd BufWritePost $MYVIMRC so $MYVIMRC
+    autocmd BufWritePost $MYVIMRC execute "syntax on"
+    autocmd BufWritePost $MYVIMRC call Pl#Load()
 augroup END
 
 " compiling
