@@ -13,12 +13,13 @@ Bundle 'FuzzyFinder'
 Bundle 'kien/ctrlp.vim'
 " colors
 " Bundle 'Lokaltog/powerline' --> still in beta
-Bundle 'Lokaltog/vim-powerline'
+" Bundle 'Lokaltog/vim-powerline'
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'daf-/vim-daylight'
+" Bundle 'daf-/vim-daylight'
 Bundle 'inkpot'
 Bundle 'mayansmoke'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'Zenburn'
 " programming
 Bundle 'SirVer/ultisnips'
 Bundle 'majutsushi/tagbar'
@@ -60,19 +61,20 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 let g:solarized_termcolors=256
 
 " Daylight
-let g:daylight_morning_color_gvim = "Tomorrow"
-let g:daylight_afternoon_color_gvim = "solarized"
-let g:daylight_evening_color_gvim = "Tomorrow-Night"
-let g:daylight_late_color_gvim = "jellybeans"
+" let g:daylight_morning_color_gvim = "Tomorrow"
+" let g:daylight_afternoon_color_gvim = "solarized"
+" let g:daylight_evening_color_gvim = "Tomorrow-Night"
+" let g:daylight_late_color_gvim = "jellybeans"
 
-let g:daylight_morning_color_term = "Tomorrow"
-let g:daylight_afternoon_color_term = "mayansmoke"
-let g:daylight_evening_color_term = "Tomorrow-Night"
-let g:daylight_late_color_term = "jellybeans"
+" let g:daylight_morning_color_term = "Tomorrow"
+" let g:daylight_afternoon_color_term = "mayansmoke"
+" let g:daylight_evening_color_term = "Tomorrow-Night"
+" let g:daylight_late_color_term = "jellybeans"
 " }}}
 " appearance {{{
 set encoding=utf-8
 syntax on
+color zenburn
 if has('gui_running')
     if has("mac")
         set guifont=Monaco:h13
@@ -196,7 +198,7 @@ augroup AutoReloadVimRC
     " automatically reload vimrc when it's saved
     autocmd BufWritePost $MYVIMRC so $MYVIMRC
     autocmd BufWritePost $MYVIMRC execute "syntax on"
-    autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
+    " autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
 augroup END
 
 " compiling
