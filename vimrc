@@ -7,23 +7,14 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 
-" FuzzyFinder for locating distant files, ctrlp for projects and buffers
-Bundle 'L9'
-Bundle 'FuzzyFinder'
 Bundle 'kien/ctrlp.vim'
-" colors
-" Bundle 'Lokaltog/powerline' --> still in beta
-" Bundle 'Lokaltog/vim-powerline'
-Bundle 'altercation/vim-colors-solarized'
-" Bundle 'daf-/vim-daylight'
-Bundle 'inkpot'
-Bundle 'mayansmoke'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'Zenburn'
-" programming
+"" colors
+Bundle 'vim-scripts/Colour-Sampler-Pack'
+Bundle 'ScrollColors'
+Bundle 'rainbow_parentheses.vim'
+"" tools
 Bundle 'SirVer/ultisnips'
 Bundle 'majutsushi/tagbar'
-Bundle 'sbl/scvim'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
@@ -74,13 +65,14 @@ let g:solarized_termcolors=256
 " appearance {{{
 set encoding=utf-8
 syntax on
-color zenburn
 if has('gui_running')
     if has("mac")
-        set guifont=Monaco:h13
+        set guifont=Source\ Code\ Pro:h13
     elseif has("unix")
         set guifont=Ubuntu\ Mono\ for\ Powerline\ 13
     endif
+    color mustang
+    " color darkbone
 endif
 " set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 " set list
@@ -110,7 +102,7 @@ set pumheight=15
 " statusline {{{
 " see https://wincent.com/wiki/Set_the_Vim_statusline
 set laststatus=2
-" set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
+set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
 
 " }}}
 " formatting {{{
@@ -128,7 +120,7 @@ vnoremap <Space> za
 set foldmethod=syntax
 set foldnestmax=1
 nnoremap <Leader><Space> zMzvzz
-"set nofoldenable
+set nofoldenable
 " }}}
 " searching {{{
 set ignorecase          " search without caring of case
@@ -170,8 +162,8 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
-nnoremap H 0
-vnoremap H 0
+nnoremap H ^
+vnoremap H ^
 nnoremap L $
 vnoremap L $
 nnoremap Y y$
@@ -180,13 +172,9 @@ nnoremap k gk
 " }}}
 " leader macros {{{
 nnoremap <Leader>; ;
-nnoremap <Leader>s :w<CR>
-nnoremap <Leader>q :q<CR>
 nnoremap <Leader>g :Gstatus<CR>
 map <Leader>cc <plug>NERDCommenterToggle
 nnoremap <Leader>t :TagbarToggle<CR>
-map <Leader>hc :r ~/.vim/honorcode.txt<CR>
-nnoremap <Leader>f :FufFile<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 " }}}
 " }}}
@@ -210,10 +198,10 @@ augroup compilation
 augroup END
 
 " lets me have man pages in their own window and syntax colored
-augroup doc
-    autocmd!
-    autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
-augroup END
+" augroup doc
+    " autocmd!
+    " autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
+" augroup END
 
 " http://blog.fluther.com/django-vim/
 augroup python
