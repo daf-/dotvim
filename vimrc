@@ -67,11 +67,12 @@ set encoding=utf-8
 syntax on
 if has('gui_running')
     if has("mac")
-        set guifont=Source\ Code\ Pro:h13
+        set guifont=Envy\ Code\ R:h14
     elseif has("unix")
         set guifont=Ubuntu\ Mono\ for\ Powerline\ 13
     endif
-    color mustang
+    let g:molokai_original=1
+    color Molokai
     " color darkbone
 endif
 " set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
@@ -106,6 +107,7 @@ set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\
 
 " }}}
 " formatting {{{
+set cinoptions+=g0   " do not indent access modifiers
 set formatoptions+=c " Auto-wrap text using textwidth
 set formatoptions+=r " Auto-insert current comment leader on next line
 set formatoptions+=o " Same as above, but when you hit o/O
