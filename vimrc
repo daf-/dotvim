@@ -1,36 +1,31 @@
 set nocompatible
 filetype off
+set shell=/bin/bash " for fish
 
 " VUNDLE {{{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
-
-
-Bundle 'kien/ctrlp.vim'
 "" colors
 Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'ScrollColors'
 Bundle 'rainbow_parentheses.vim'
 "" tools
 Bundle 'SirVer/ultisnips'
+Bundle 'klen/python-mode'
 Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/syntastic'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
+"" misc
+Bundle 'kien/ctrlp.vim'
 " }}}
 " plugin settings {{{
 
 " load filetype plugins
 filetype plugin on
 filetype plugin indent on
-
-" Syntastic
-let g:syntastic_python_checker = 'flake8'
-let g:syntastic_error_symbol='✗'    " from syntastic manual
-let g:syntastic_warning_symbol='⚠'  " from syntastic manual
 
 " NERDcommenter
 let g:NERDRemoveExtraSpaces=1
@@ -50,17 +45,6 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Solarized
 let g:solarized_termcolors=256
-
-" Daylight
-" let g:daylight_morning_color_gvim = "Tomorrow"
-" let g:daylight_afternoon_color_gvim = "solarized"
-" let g:daylight_evening_color_gvim = "Tomorrow-Night"
-" let g:daylight_late_color_gvim = "jellybeans"
-
-" let g:daylight_morning_color_term = "Tomorrow"
-" let g:daylight_afternoon_color_term = "mayansmoke"
-" let g:daylight_evening_color_term = "Tomorrow-Night"
-" let g:daylight_late_color_term = "jellybeans"
 " }}}
 " appearance {{{
 set encoding=utf-8
@@ -69,11 +53,12 @@ if has('gui_running')
     if has("mac")
         set guifont=Envy\ Code\ R:h14
     elseif has("unix")
-        set guifont=Ubuntu\ Mono\ for\ Powerline\ 13
+        set guifont=Envy\ Code\ R\ 11
     endif
     let g:molokai_original=1
-    color Molokai
-    " color darkbone
+    color twilight
+else
+    color vimbrant
 endif
 " set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 " set list
@@ -133,22 +118,22 @@ set ruler               " always show location information
 set showmatch           " show matching paren
 
 " better highlighting
-" nnoremap / :set nohlsearch<CR>/
-" nnoremap ? :set nohlsearch<CR>?
-" vnoremap / :set nohlsearch<CR>/
-" vnoremap ? :set nohlsearch<CR>?
+nnoremap / :set nohlsearch<CR>/
+nnoremap ? :set nohlsearch<CR>?
+vnoremap / :set nohlsearch<CR>/
+vnoremap ? :set nohlsearch<CR>?
 
-" nnoremap n :set hlsearch<CR>n
-" nnoremap N :set hlsearch<CR>N
-" vnoremap n :set hlsearch<CR>n
-" vnoremap N :set hlsearch<CR>N
+nnoremap n :set hlsearch<CR>n
+nnoremap N :set hlsearch<CR>N
+vnoremap n :set hlsearch<CR>n
+vnoremap N :set hlsearch<CR>N
 
-" nnoremap i :set nohlsearch<CR>i
-" nnoremap I :set nohlsearch<CR>I
-" nnoremap a :set nohlsearch<CR>a
-" nnoremap A :set nohlsearch<CR>A
-" nnoremap o :set nohlsearch<CR>o
-" nnoremap O :set nohlsearch<CR>O
+nnoremap i :set nohlsearch<CR>i
+nnoremap I :set nohlsearch<CR>I
+nnoremap a :set nohlsearch<CR>a
+nnoremap A :set nohlsearch<CR>A
+nnoremap o :set nohlsearch<CR>o
+nnoremap O :set nohlsearch<CR>O
 " }}}
 " remaps {{{
 let mapleader=","
@@ -206,10 +191,10 @@ augroup END
 " augroup END
 
 " http://blog.fluther.com/django-vim/
-augroup python
-    autocmd!
-    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-augroup END
+" augroup python
+    " autocmd!
+    " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+" augroup END
 
 augroup filetype_vim
     autocmd!
