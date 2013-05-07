@@ -27,6 +27,9 @@ Bundle 'kien/ctrlp.vim'
 filetype plugin on
 filetype plugin indent on
 
+" python-mode
+let g:pymode_lint_checker = "pyflakes,mccabe" " no pep8
+
 " NERDcommenter
 let g:NERDRemoveExtraSpaces=1
 let g:NERDSpaceDelims=1
@@ -53,14 +56,16 @@ if has('gui_running')
     if has("mac")
         set guifont=Envy\ Code\ R:h14
     elseif has("unix")
-        set guifont=Envy\ Code\ R\ 11
+        " set guifont=Source\ Code\ Pro\ Medium\ 11
+        set guifont=Ubuntu\ Mono\ 11
     endif
     let g:molokai_original=1
     color twilight
+    " color zenesque
 else
     color vimbrant
 endif
-" set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
+set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 " set list
 
 " }}}
