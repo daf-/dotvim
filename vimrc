@@ -11,6 +11,7 @@ Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'ScrollColors'
 Bundle 'rainbow_parentheses.vim'
 "" tools
+Bundle 'jeroenbourgois/vim-actionscript'
 Bundle 'SirVer/ultisnips'
 Bundle 'klen/python-mode'
 Bundle 'majutsushi/tagbar'
@@ -60,12 +61,10 @@ if has('gui_running')
         set guifont=Ubuntu\ Mono\ 11
     endif
     let g:molokai_original=1
-    color twilight
-    " color zenesque
-else
-    color vimbrant
 endif
+color xoria256
 set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
+set cursorline
 " set list
 
 " }}}
