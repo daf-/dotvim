@@ -19,6 +19,8 @@ Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-surround'
+Bundle 'matchit.zip'
+Bundle 'ruby-matchit'
 "" misc
 Bundle 'kien/ctrlp.vim'
 " }}}
@@ -62,7 +64,7 @@ if has('gui_running')
     endif
     let g:molokai_original=1
 endif
-color xoria256
+color pyte
 set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
 set cursorline
 " set list
@@ -75,6 +77,7 @@ set mouse=a
 set guioptions-=T " hide toolbar
 set guioptions-=r " hide scrollbar
 set splitbelow
+set splitright
 set textwidth=72
 set scrolloff=5
 set autoindent
