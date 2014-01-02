@@ -1,8 +1,7 @@
+" Packages {{{
 set nocompatible
 filetype off
-set shell=/bin/bash " for fish
 
-" VUNDLE {{{
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
@@ -10,95 +9,42 @@ Bundle 'gmarik/vundle'
 Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'ScrollColors'
 Bundle 'rainbow_parentheses.vim'
+Bundle 'w0ng/vim-hybrid'
+Bundle 'morhetz/gruvbox'
+Bundle 'noahfrederick/vim-hemisu'
 "" tools
-Bundle 'jeroenbourgois/vim-actionscript'
 Bundle 'SirVer/ultisnips'
 Bundle 'klen/python-mode'
 Bundle 'majutsushi/tagbar'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
+Bundle 'tpope/vim-endwise'
 Bundle 'tpope/vim-git'
+Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
+Bundle 'tpope/vim-vinegar'
 Bundle 'matchit.zip'
-Bundle 'ruby-matchit'
-"" misc
 Bundle 'kien/ctrlp.vim'
 " }}}
-" plugin settings {{{
-
-" load filetype plugins
-filetype plugin on
-filetype plugin indent on
-
-" python-mode
-let g:pymode_lint_checker = "pyflakes,mccabe" " no pep8
-
-" NERDcommenter
-let g:NERDRemoveExtraSpaces=1
-let g:NERDSpaceDelims=1
-
-" Ctrl-p
-" from https://gist.github.com/67de417c5c38f0ff8093
-let g:ctrlp_custom_ignore = {
-    \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-    \ 'file': '\.exe$\|\.so$\|\.dat$'
-    \ }
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
-
-" Solarized
-let g:solarized_termcolors=256
-" }}}
-" appearance {{{
+" Better defaults {{{
 set encoding=utf-8
-syntax on
-if has('gui_running')
-    if has("mac")
-        set guifont=Envy\ Code\ R:h14
-    elseif has("unix")
-        " set guifont=Source\ Code\ Pro\ Medium\ 11
-        set guifont=Ubuntu\ Mono\ 11
-    endif
-    let g:molokai_original=1
-endif
-color pyte
-set listchars=eol:¬,extends:»,tab:▸\ ,trail:›
-set cursorline
-" set list
-
-" }}}
-" basic {{{
 set hidden
 set number
 set mouse=a
-set guioptions-=T " hide toolbar
-set guioptions-=r " hide scrollbar
 set splitbelow
 set splitright
 set textwidth=72
 set scrolloff=5
-set autoindent
-set expandtab
-set shiftwidth=4
 set tabstop=8
-set softtabstop=4
+set softtabstop=-1 " use value of shiftwidth
 set backspace=2
-set cinkeys=0{,0},0),0#,;,:,o,O,e
-set indentkeys=o,O,:,0#,e
+set autochdir
 set wildmenu
 set wildignore=*.o,*.obj,*.pyc,*.class
-set pumheight=15
 " }}}
-" statusline {{{
-" see https://wincent.com/wiki/Set_the_Vim_statusline
-set laststatus=2
-set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
-
-" }}}
-" formatting {{{
+" Formatting {{{
+set cinkeys=0{,0},0),0#,;,:,o,O,e
+set indentkeys=o,O,:,0#,e
 set cinoptions+=g0   " do not indent access modifiers
 set formatoptions+=c " Auto-wrap text using textwidth
 set formatoptions+=r " Auto-insert current comment leader on next line
@@ -108,43 +54,18 @@ set formatoptions+=n " recognizes numbered lists when formatting text
 set formatoptions+=2 " keeps indenting on different lines
 "set equalprg=indent\ -kr\ -nut "\ -prs " '=' command uses 'indent' unix prog to format code
 " }}}
-" folding {{{
+" Folding {{{
 nnoremap <Space> za
 vnoremap <Space> za
 set foldmethod=syntax
-set foldnestmax=1
+set foldnestmax=2
 nnoremap <Leader><Space> zMzvzz
-set nofoldenable
 " }}}
-" searching {{{
-set ignorecase          " search without caring of case
-set smartcase           " only ignore case when lowercase
-set incsearch           " show matches as they occur
-set pastetoggle=<F5>    " used for pasting in data
-set ruler               " always show location information
-set showmatch           " show matching paren
-
-" better highlighting
-nnoremap / :set nohlsearch<CR>/
-nnoremap ? :set nohlsearch<CR>?
-vnoremap / :set nohlsearch<CR>/
-vnoremap ? :set nohlsearch<CR>?
-
-nnoremap n :set hlsearch<CR>n
-nnoremap N :set hlsearch<CR>N
-vnoremap n :set hlsearch<CR>n
-vnoremap N :set hlsearch<CR>N
-
-nnoremap i :set nohlsearch<CR>i
-nnoremap I :set nohlsearch<CR>I
-nnoremap a :set nohlsearch<CR>a
-nnoremap A :set nohlsearch<CR>A
-nnoremap o :set nohlsearch<CR>o
-nnoremap O :set nohlsearch<CR>O
-" }}}
-" remaps {{{
+" Remaps {{{
 let mapleader=","
 " easier defaults {{{
+nnoremap p ]p
+
 inoremap kj <Esc>
 inoremap jk <Esc>
 
@@ -172,70 +93,141 @@ nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 " }}}
 " }}}
-" autocmds {{{
+" Searching {{{
+set ignorecase          " search without caring of case
+set smartcase           " only ignore case when lowercase
+set incsearch           " show matches as they occur
+set pastetoggle=<F5>    " used for pasting in data
+set ruler               " always show location information
+set showmatch           " show matching paren
 
-" reload .vimrc whenever saved -- from https://gist.github.com/1988620
+" better highlighting
+nnoremap / :set nohlsearch<CR>/
+nnoremap ? :set nohlsearch<CR>?
+vnoremap / :set nohlsearch<CR>/
+vnoremap ? :set nohlsearch<CR>?
+
+nnoremap n :set hlsearch<CR>n
+nnoremap N :set hlsearch<CR>N
+vnoremap n :set hlsearch<CR>n
+vnoremap N :set hlsearch<CR>N
+
+nnoremap i :set nohlsearch<CR>i
+nnoremap I :set nohlsearch<CR>I
+nnoremap a :set nohlsearch<CR>a
+nnoremap A :set nohlsearch<CR>A
+nnoremap o :set nohlsearch<CR>o
+nnoremap O :set nohlsearch<CR>O
+" }}}
+" Appearance {{{
+syntax on
+if has('gui_running')
+  set guioptions-=T " hide toolbar
+  set guioptions-=r " hide scrollbar
+  if has("mac")
+    set guifont=Anonymous\ Pro:h14
+  elseif has("unix")
+    set guifont=Ubuntu\ Mono\ 11
+  endif
+  color hybrid-light
+else
+  color hybrid
+end
+set listchars=extends:»,tab:▸\ ,trail:·,extends:»
+set list
+set cursorline
+" set list
+" }}}
+" Statusline {{{
+" see https://wincent.com/wiki/Set_the_Vim_statusline
+set laststatus=2
+set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
+
+" }}}
+" Autocmds {{{
+augroup filetype_settings
+  autocmd!
+
+  " vim
+  autocmd FileType vim setlocal sw=2
+  autocmd FileType vim setlocal foldmethod=marker
+
+  " ruby
+  autocmd FileType ruby setlocal re=1 "  faster syntax highlighting?
+  autocmd FileType ruby setlocal sw=2
+
+  " js
+  autocmd FileType javascript setlocal sw=2
+
+  " html
+  autocmd FileType html setlocal sw=2
+
+  " c/c++
+  autocmd FileType c,cpp setlocal sw=4
+
+  " java
+  autocmd FileType java setlocal sw=4
+augroup END
+
+augroup delete_whitespace
+  " Always delete trailing whitespace before saving
+  autocmd!
+  autocmd BufWritePre <buffer> :%s/\s\+$//e
+augroup END
+
 augroup AutoReloadVimRC
-    autocmd!
-    " automatically reload vimrc when it's saved
-    autocmd BufWritePost $MYVIMRC so $MYVIMRC
-    autocmd BufWritePost $MYVIMRC execute "syntax on"
-    " autocmd BufWritePost $MYVIMRC PowerlineReloadColorscheme
+  " reload .vimrc whenever saved -- from https://gist.github.com/1988620
+  autocmd!
+  " automatically reload vimrc when it's saved
+  autocmd BufWritePost $MYVIMRC so $MYVIMRC
+  autocmd BufWritePost $MYVIMRC execute "syntax on"
 augroup END
 
 " compiling
 augroup compilation
-    autocmd!
-    autocmd QuickFixCmdPost [^l]* nested cwindow
-    autocmd QuickFixCmdPost    l* nested lwindow
-    autocmd Filetype java setlocal makeprg=javac\ %
+  autocmd!
+  autocmd QuickFixCmdPost [^l]* nested cwindow
+  autocmd QuickFixCmdPost    l* nested lwindow
+  autocmd Filetype java setlocal makeprg=javac\ %
 augroup END
 
-" lets me have man pages in their own window and syntax colored
-" augroup doc
-    " autocmd!
-    " autocmd BufRead,BufEnter *.{c,cpp,h} source ~/.vim_macros/manpages-functions.vim
+" augroup auto_chdir
+  " autocmd!
+  " " from http://stackoverflow.com/questions/5793294/vim-cr-mapping-not-working
+  " " Automatically cd into the directory that the file is in
+  " autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
 " augroup END
 
-" http://blog.fluther.com/django-vim/
-" augroup python
-    " autocmd!
-    " autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-" augroup END
-
-augroup filetype_vim
-    autocmd!
-    autocmd FileType vim setlocal foldmethod=marker
-    " always use case-sensitive comparison, but don't screw up ==?
-    autocmd Filetype vim setlocal iskeyword+=?
-    autocmd FileType vim iabbrev <buffer> == ==#
-    " autocmd FileType vim iabbrev <buffer> > >#
-    " autocmd FileType vim iabbrev <buffer> < <#
-augroup END
-
-augroup auto_chdir
-    autocmd!
-    " from http://stackoverflow.com/questions/5793294/vim-cr-mapping-not-working
-    " Automatically cd into the directory that the file is in
-    autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-augroup END
-
 " }}}
-" misc {{{
+" Plugin settings {{{
+filetype plugin on
+filetype plugin indent on
 
-" no beeping, please
-" set visualbell
+" python-mode
+let g:pymode_lint_checker = "pyflakes,mccabe" " no pep8
 
-" insert current path into command prompt
-cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
+" NERDcommenter
+let g:NERDRemoveExtraSpaces=1
+let g:NERDSpaceDelims=1
 
-" quick-fix window
-" ----------------
-nnoremap <Leader>v :e ~/.vimrc<CR>
+" Ctrl-p
+" from https://gist.github.com/67de417c5c38f0ff8093
+let g:ctrlp_custom_ignore = {
+      \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
+      \ 'file': '\.exe$\|\.so$\|\.dat$'
+      \ }
 
+" UltiSnips
+let g:UltiSnipsExpandTrigger="<SPC>"
+let g:UltiSnipsJumpForwardTrigger="^j"
+let g:UltiSnipsJumpBackwardTrigger="^i"
+
+" Themes
+let g:solarized_termcolors=256
+let g:molokai_original=1
+let g:hybrid_use_Xresources = 1
 " }}}
-" Ben Kuperman -- mostly macros {{{
-
+" Stuff from Ben {{{
 " I Make a bunch of text headlines
 map! <Leader>ul <esc>:let @h=@/<cr>yypV:s/^[ ]*//<CR>V:s/./-/g<cr>:let @/=@h<CR>kJi<CR><esc>o
 map  <Leader>ul :let @h=@/<cr>yypV:s/^[ ]*//<CR>V:s/./-/g<cr>:let @/=@h<CR>kJi<CR><esc>
@@ -250,62 +242,10 @@ nmap <Leader>date i<cr><esc>k:r!date +"\%d \%B \%Y"<cr>kJJ
 map! <Leader>date <cr><esc>k:r!date +"\%d \%B \%Y"<cr>kJJi
 nmap <Leader>sdate i<cr><esc>k:r!date +"\%m/\%d/\%y"<cr>kJJ
 map! <Leader>sdate <cr><esc>k:r!date +"\%m/\%d/\%y"<cr>kJJi
-
-set dictionary=/usr/share/dict/words
-if v:version >= 700
-    " Stuff for tabs
-    " hi TabLineSel ctermbg=blue ctermfg=white cterm=bold
-    " hi TabLine    cterm=reverse ctermfg=darkgray ctermbg=white
-    " hi TabLineFill ctermbg=darkgray ctermfg=darkgray
-
-    " color fixes
-    " highlight MatchParen ctermbg=blue
-    "highlight PmenuSel ctermfg=black ctermbg=lightgray 
-endif
-
-if has("spell")
-    " set spell
-    set spelllang=en_us
-    set sps=best,10
-    
-    autocmd BufRead mutt-* setlocal spell
-    autocmd BufRead .article.* setlocal spell
-    autocmd BufEnter,BufNewFile,BufRead *.tex setlocal spell
-
-    autocmd BufNewFile,BufRead,BufCreate */classes/*/Lectures/* setlocal spc=""
-    autocmd BufNewFile,BufRead,BufCreate /manual\ page setlocal nospell
-    autocmd BufNewFile,BufRead,BufCreate /dictionary\ page setlocal nospell
-    autocmd BufNewFile,BufRead,BufCreate /thesaurus\ page setlocal nospell
-
-endif
-
-"""
-" autocommands
-
-" for C programs
-autocmd BufRead *.c source ~/.vim_macros/c.vim
-autocmd BufNewFile,BufCreate *.c source ~/.vim_macros/c.vim
-autocmd BufRead *.h source ~/.vim_macros/c.vim
-autocmd BufNewFile,BufCreate *.h source ~/.vim_macros/c.vim
-autocmd BufRead Makefile setlocal noexpandtab
-autocmd BufNewFile,BufCreate Makefile setlocal noexpandtab
-autocmd FileType make setlocal noexpandtab
-
-" use cscope if available
-if has("cscope")
-        set csprg=/usr/bin/cscope
-        set csto=0
-        set cst
-        set nocsverb
-        " add any database in current directory
-        if filereadable("cscope.out")
-            cs add cscope.out
-        " else add database pointed to by environment
-        elseif $CSCOPE_DB != ""
-            cs add $CSCOPE_DB
-        endif
-        set csverb
-endif
-
+" }}}
+" Misc {{{
+" insert current path into command prompt
+cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
+nnoremap <Leader>v :e ~/.vimrc<CR>
 " }}}
 " vim: set fdm=marker:
