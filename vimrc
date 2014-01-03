@@ -38,6 +38,7 @@ set scrolloff=5
 set tabstop=8
 set softtabstop=-1 " use value of shiftwidth
 set backspace=2
+set expandtab
 set autochdir
 set wildmenu
 set wildignore=*.o,*.obj,*.pyc,*.class
@@ -64,7 +65,8 @@ nnoremap <Leader><Space> zMzvzz
 " Remaps {{{
 let mapleader=","
 " easier defaults {{{
-nnoremap p ]p
+nnoremap p p=`]
+nnoremap P P=`]
 
 inoremap kj <Esc>
 inoremap jk <Esc>
@@ -119,25 +121,6 @@ nnoremap A :set nohlsearch<CR>A
 nnoremap o :set nohlsearch<CR>o
 nnoremap O :set nohlsearch<CR>O
 " }}}
-" Appearance {{{
-syntax on
-if has('gui_running')
-  set guioptions-=T " hide toolbar
-  set guioptions-=r " hide scrollbar
-  if has("mac")
-    set guifont=Anonymous\ Pro:h14
-  elseif has("unix")
-    set guifont=Ubuntu\ Mono\ 11
-  endif
-  color hybrid-light
-else
-  color hybrid
-end
-set listchars=extends:»,tab:▸\ ,trail:·,extends:»
-set list
-set cursorline
-" set list
-" }}}
 " Statusline {{{
 " see https://wincent.com/wiki/Set_the_Vim_statusline
 set laststatus=2
@@ -155,6 +138,7 @@ augroup filetype_settings
   " ruby
   autocmd FileType ruby setlocal re=1 "  faster syntax highlighting?
   autocmd FileType ruby setlocal sw=2
+  autocmd FileType eruby setlocal sw=2
 
   " js
   autocmd FileType javascript setlocal sw=2
@@ -218,14 +202,33 @@ let g:ctrlp_custom_ignore = {
       \ }
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger="<SPC>"
-let g:UltiSnipsJumpForwardTrigger="^j"
-let g:UltiSnipsJumpBackwardTrigger="^i"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 " Themes
 let g:solarized_termcolors=256
 let g:molokai_original=1
 let g:hybrid_use_Xresources = 1
+" }}}
+" Appearance {{{
+syntax on
+if has('gui_running')
+  set guioptions-=T " hide toolbar
+  set guioptions-=r " hide scrollbar
+  if has("mac")
+    set guifont=Anonymous\ Pro:h14
+  elseif has("unix")
+    set guifont=Ubuntu\ Mono\ 11
+  endif
+  color hybrid-light
+else
+  color hybrid
+end
+set listchars=extends:»,tab:▸\ ,trail:·,extends:»
+set list
+set cursorline
+" set list
 " }}}
 " Stuff from Ben {{{
 " I Make a bunch of text headlines
