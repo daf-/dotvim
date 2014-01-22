@@ -13,6 +13,7 @@ Bundle 'w0ng/vim-hybrid'
 Bundle 'morhetz/gruvbox'
 Bundle 'noahfrederick/vim-hemisu'
 "" tools
+Bundle 'Auto-Pairs'
 Bundle 'SirVer/ultisnips'
 Bundle 'klen/python-mode'
 Bundle 'majutsushi/tagbar'
@@ -141,6 +142,10 @@ augroup filetype_settings
 
   " html
   autocmd FileType html setlocal sw=2
+  autocmd FileType htmldjango setlocal sw=2
+
+  " css
+  autocmd Filetype css setlocal sw=2
 
   " c/c++
   autocmd FileType c,cpp setlocal sw=4
@@ -213,11 +218,11 @@ if has('gui_running')
   set guioptions-=T " hide toolbar
   set guioptions-=r " hide scrollbar
   if has("mac")
-    set guifont=Anonymous\ Pro:h14
+    set guifont=Monaco:h13
   elseif has("unix")
     set guifont=Ubuntu\ Mono\ 11
   endif
-  color hybrid-light
+  color twilight
 else
   color hybrid
 end
