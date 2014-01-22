@@ -65,9 +65,6 @@ nnoremap <Leader><Space> zMzvzz
 " Remaps {{{
 let mapleader=","
 " easier defaults {{{
-nnoremap p p=`]
-nnoremap P P=`]
-
 inoremap kj <Esc>
 inoremap jk <Esc>
 
@@ -90,7 +87,6 @@ nnoremap k gk
 " leader macros {{{
 nnoremap <Leader>; ;
 nnoremap <Leader>g :Gstatus<CR>
-map <Leader>cc <plug>NERDCommenterToggle
 nnoremap <Leader>t :TagbarToggle<CR>
 nnoremap <Leader>b :CtrlPBuffer<CR>
 " }}}
