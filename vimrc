@@ -10,13 +10,11 @@ Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'ScrollColors'
 Bundle 'rainbow_parentheses.vim'
 Bundle 'w0ng/vim-hybrid'
-Bundle 'morhetz/gruvbox'
-Bundle 'noahfrederick/vim-hemisu'
 "" tools
 Bundle 'Auto-Pairs'
 Bundle 'SirVer/ultisnips'
 Bundle 'klen/python-mode'
-Bundle 'majutsushi/tagbar'
+Bundle 'jelera/vim-javascript-syntax'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-endwise'
@@ -32,6 +30,7 @@ set encoding=utf-8
 set hidden
 set number
 set mouse=a
+set ttymouse=xterm2
 set splitbelow
 set splitright
 set textwidth=72
@@ -146,6 +145,7 @@ augroup filetype_settings
 
   " css
   autocmd Filetype css setlocal sw=2
+  autocmd Filetype scss setlocal sw=2
 
   " c/c++
   autocmd FileType c,cpp setlocal sw=4
@@ -210,7 +210,7 @@ let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 " Themes
 let g:solarized_termcolors=256
 let g:molokai_original=1
-let g:hybrid_use_Xresources = 1
+let g:hybrid_use_Xresources=1
 " }}}
 " Appearance {{{
 syntax on
