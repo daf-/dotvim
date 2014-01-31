@@ -22,6 +22,7 @@ Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vinegar'
+Bundle 'tpope/vim-dispatch'
 Bundle 'matchit.zip'
 Bundle 'kien/ctrlp.vim'
 " }}}
