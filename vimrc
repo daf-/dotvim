@@ -37,6 +37,7 @@ set splitright
 set textwidth=72
 set scrolloff=5
 set tabstop=8
+set shiftwidth=4
 set softtabstop=-1 " use value of shiftwidth
 set backspace=2
 set expandtab
@@ -47,6 +48,7 @@ set wildignore=*.o,*.obj,*.pyc,*.class
 " Formatting {{{
 set cinkeys=0{,0},0),0#,;,:,o,O,e
 set indentkeys=o,O,:,0#,e
+set cinoptions+=(0   " indent parenthetical function arguments correctly
 set cinoptions+=g0   " do not indent access modifiers
 set formatoptions+=c " Auto-wrap text using textwidth
 set formatoptions+=r " Auto-insert current comment leader on next line
