@@ -35,7 +35,6 @@ set ttymouse=xterm2
 set splitbelow
 set splitright
 set textwidth=72
-set scrolloff=5
 set tabstop=8
 set shiftwidth=4
 set softtabstop=-1 " use value of shiftwidth
@@ -78,14 +77,6 @@ nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-
-nnoremap H ^
-vnoremap H ^
-nnoremap L $
-vnoremap L $
-nnoremap Y y$
-nnoremap j gj
-nnoremap k gk
 " }}}
 " leader macros {{{
 nnoremap <Leader>; ;
