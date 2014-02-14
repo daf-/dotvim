@@ -5,6 +5,7 @@ filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 Bundle 'gmarik/vundle'
+
 "" colors
 Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'ScrollColors'
@@ -184,6 +185,9 @@ filetype plugin indent on
 
 " python-mode
 let g:pymode_lint_checker = "pyflakes,mccabe" " no pep8
+let g:pymode_lint = 0
+let g:pymode_breakpoint = 0
+let g:pymode_rope = 0
 
 " NERDcommenter
 let g:NERDRemoveExtraSpaces=1
