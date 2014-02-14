@@ -15,6 +15,7 @@ Bundle 'w0ng/vim-hybrid'
 Bundle 'Auto-Pairs'
 Bundle 'SirVer/ultisnips'
 Bundle 'klen/python-mode'
+Bundle 'godlygeek/tabular'
 Bundle 'jelera/vim-javascript-syntax'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'tpope/vim-fugitive'
@@ -216,7 +217,7 @@ if has('gui_running')
   set guioptions-=T " hide toolbar
   set guioptions-=r " hide scrollbar
   if has("mac")
-    set guifont=Monaco:h13
+    set guifont=Monaco:h11
   elseif has("unix")
     set guifont=Ubuntu\ Mono\ 11
   endif
