@@ -7,26 +7,32 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 "" colors
-Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'ScrollColors'
 Bundle 'rainbow_parentheses.vim'
+Bundle 'vim-scripts/Colour-Sampler-Pack'
 Bundle 'w0ng/vim-hybrid'
 "" tools
 Bundle 'Auto-Pairs'
 Bundle 'SirVer/ultisnips'
-Bundle 'klen/python-mode'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'airblade/vim-gitgutter'
 Bundle 'godlygeek/tabular'
+Bundle 'honza/vim-snippets'
 Bundle 'jelera/vim-javascript-syntax'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'tpope/vim-fugitive'
+Bundle 'kchmck/vim-coffee-script'
+Bundle 'kien/ctrlp.vim'
+Bundle 'klen/python-mode'
+Bundle 'matchit.zip'
+Bundle 'rking/ag.vim'
+Bundle 'scrooloose/nerdtree'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-dispatch'
 Bundle 'tpope/vim-endwise'
+Bundle 'tpope/vim-fugitive'
 Bundle 'tpope/vim-git'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'tpope/vim-vinegar'
-Bundle 'tpope/vim-dispatch'
-Bundle 'matchit.zip'
-Bundle 'kien/ctrlp.vim'
 " }}}
 " Better defaults {{{
 set encoding=utf-8
@@ -42,7 +48,7 @@ set shiftwidth=4
 set softtabstop=-1 " use value of shiftwidth
 set backspace=2
 set expandtab
-set autochdir
+set autoread
 set wildmenu
 set wildignore=*.o,*.obj,*.pyc,*.class
 " }}}
@@ -64,27 +70,26 @@ nnoremap <Space> za
 vnoremap <Space> za
 set foldmethod=syntax
 set foldnestmax=2
+set nofoldenable
 nnoremap <Leader><Space> zMzvzz
 " }}}
 " Remaps {{{
 let mapleader=","
 " easier defaults {{{
+nnoremap Y y$
 inoremap kj <Esc>
 inoremap jk <Esc>
 
 nnoremap ; :
 vnoremap ; :
+nnoremap <Leader>; ;
+
+nnoremap <Leader>k :bp\|bd #<CR>
 
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
-" }}}
-" leader macros {{{
-nnoremap <Leader>; ;
-nnoremap <Leader>g :Gstatus<CR>
-nnoremap <Leader>t :TagbarToggle<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
 " }}}
 " }}}
 " Searching {{{
@@ -94,24 +99,6 @@ set incsearch           " show matches as they occur
 set pastetoggle=<F5>    " used for pasting in data
 set ruler               " always show location information
 set showmatch           " show matching paren
-
-" better highlighting
-nnoremap / :set nohlsearch<CR>/
-nnoremap ? :set nohlsearch<CR>?
-vnoremap / :set nohlsearch<CR>/
-vnoremap ? :set nohlsearch<CR>?
-
-nnoremap n :set hlsearch<CR>n
-nnoremap N :set hlsearch<CR>N
-vnoremap n :set hlsearch<CR>n
-vnoremap N :set hlsearch<CR>N
-
-nnoremap i :set nohlsearch<CR>i
-nnoremap I :set nohlsearch<CR>I
-nnoremap a :set nohlsearch<CR>a
-nnoremap A :set nohlsearch<CR>A
-nnoremap o :set nohlsearch<CR>o
-nnoremap O :set nohlsearch<CR>O
 " }}}
 " Statusline {{{
 " see https://wincent.com/wiki/Set_the_Vim_statusline
@@ -128,20 +115,20 @@ augroup filetype_settings
   autocmd FileType vim setlocal foldmethod=marker
 
   " ruby
-  autocmd FileType ruby setlocal re=1 "  faster syntax highlighting?
   autocmd FileType ruby setlocal sw=2
   autocmd FileType eruby setlocal sw=2
 
   " js
-  autocmd FileType javascript setlocal sw=2
+  autocmd FileType javascript setlocal sw=4
+  autocmd FileType javascript setlocal fo-=c " Don't auto-wrap
 
   " html
-  autocmd FileType html setlocal sw=2
-  autocmd FileType htmldjango setlocal sw=2
+  autocmd FileType html setlocal sw=4
+  autocmd FileType htmldjango setlocal sw=4
 
   " css
-  autocmd Filetype css setlocal sw=2
-  autocmd Filetype scss setlocal sw=2
+  autocmd Filetype css setlocal sw=4
+  autocmd Filetype scss setlocal sw=4
 
   " c/c++
   autocmd FileType c,cpp setlocal sw=4
@@ -180,31 +167,40 @@ augroup END
 " augroup END
 
 " }}}
+" Helper Macros/functions{{{
+" global file replace on inner word
+nnoremap <leader>R yiw:%s/<C-r>"//g<Left><Left>
+" }}}
 " Plugin settings {{{
 filetype plugin on
 filetype plugin indent on
+
+" ctrlp
+nnoremap <Leader>b :CtrlPBuffer<CR>
 
 " python-mode
 let g:pymode_lint_checker = "pyflakes,mccabe" " no pep8
 let g:pymode_lint = 0
 let g:pymode_breakpoint = 0
 let g:pymode_rope = 0
+let g:pymode_options_max_line_length = 120
+let g:pymode_doc = 0
 
-" NERDcommenter
-let g:NERDRemoveExtraSpaces=1
-let g:NERDSpaceDelims=1
+" youcompleteme
+let g:ycm_autoclose_preview_window_after_completion = 1
+let g:ycm_collect_identifiers_from_tags_files = 1
 
-" Ctrl-p
-" from https://gist.github.com/67de417c5c38f0ff8093
-let g:ctrlp_custom_ignore = {
-      \ 'dir':  '\.git$\|\.hg$\|\.svn$\|\.yardoc\|public\/images\|public\/system\|data\|log\|tmp$',
-      \ 'file': '\.exe$\|\.so$\|\.dat$'
-      \ }
+" NERDTree
+let g:NERDTreeRespectWildIgnore=1
+nnoremap <Leader>n :NERDTreeToggle<CR>
 
 " UltiSnips
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
+let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsJumpForwardTrigger="<c-j>"
+let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+" fugitive
+nnoremap <Leader>g :Gstatus<CR>
 
 " Themes
 let g:solarized_termcolors=256
@@ -213,21 +209,15 @@ let g:hybrid_use_Xresources=1
 " }}}
 " Appearance {{{
 syntax on
-if has('gui_running')
-  set guioptions-=T " hide toolbar
-  set guioptions-=r " hide scrollbar
-  if has("mac")
-    set guifont=Monaco:h11
-  elseif has("unix")
-    set guifont=Ubuntu\ Mono\ 11
-  endif
-  color twilight
-else
-  color hybrid
-end
+color xoria256
 set listchars=extends:»,tab:▸\ ,trail:·,extends:»
 set list
 set cursorline
+if has('gui_running')
+  set guioptions-=T " hide toolbar
+  set guioptions-=r " hide scrollbar
+  set guifont=Menlo\ Regular:h12
+endif
 " set list
 " }}}
 " Stuff from Ben {{{
