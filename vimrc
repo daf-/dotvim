@@ -16,6 +16,7 @@ Bundle 'Auto-Pairs'
 Bundle 'SirVer/ultisnips'
 Bundle 'Valloric/YouCompleteMe'
 Bundle 'airblade/vim-gitgutter'
+Bundle 'bling/vim-airline'
 Bundle 'godlygeek/tabular'
 Bundle 'honza/vim-snippets'
 Bundle 'jelera/vim-javascript-syntax'
@@ -96,6 +97,7 @@ nnoremap <C-l> <C-w>l
 set ignorecase          " search without caring of case
 set smartcase           " only ignore case when lowercase
 set incsearch           " show matches as they occur
+set hlsearch
 set pastetoggle=<F5>    " used for pasting in data
 set ruler               " always show location information
 set showmatch           " show matching paren
@@ -177,6 +179,7 @@ filetype plugin indent on
 
 " ctrlp
 nnoremap <Leader>b :CtrlPBuffer<CR>
+let g:ctrlp_extensions = ['buffertag']
 
 " python-mode
 let g:pymode_lint_checker = "pyflakes,mccabe" " no pep8
@@ -202,6 +205,10 @@ let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 " fugitive
 nnoremap <Leader>g :Gstatus<CR>
 
+" airline
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
 " Themes
 let g:solarized_termcolors=256
 let g:molokai_original=1
@@ -209,7 +216,6 @@ let g:hybrid_use_Xresources=1
 " }}}
 " Appearance {{{
 syntax on
-color xoria256
 set listchars=extends:»,tab:▸\ ,trail:·,extends:»
 set list
 set cursorline
@@ -217,6 +223,9 @@ if has('gui_running')
   set guioptions-=T " hide toolbar
   set guioptions-=r " hide scrollbar
   set guifont=Menlo\ Regular:h12
+  color xoria256
+else
+  color jellybeans
 endif
 " set list
 " }}}
