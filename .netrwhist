@@ -1,5 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =3
-let g:netrw_dirhist_1='/Users/danielfriedman/.vim_macros'
-let g:netrw_dirhist_2='/Users/danielfriedman/.vim'
-let g:netrw_dirhist_3='/Users/danielfriedman/.vim/.git/modules'

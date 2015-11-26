@@ -1,59 +1,80 @@
-" Packages {{{
-set nocompatible
-filetype off
+" NeoBundle {{{
+if has('vim_starting')
+  if &compatible
+    set nocompatible               " Be iMproved
+  endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
+  " Required:
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
 
-"" colors
-Bundle 'ScrollColors'
-Bundle 'rainbow_parentheses.vim'
-Bundle 'vim-scripts/Colour-Sampler-Pack'
-Bundle 'w0ng/vim-hybrid'
-"" tools
-Bundle 'Auto-Pairs'
-Bundle 'SirVer/ultisnips'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'airblade/vim-gitgutter'
-Bundle 'bling/vim-airline'
-Bundle 'godlygeek/tabular'
-Bundle 'honza/vim-snippets'
-Bundle 'jelera/vim-javascript-syntax'
-Bundle 'kchmck/vim-coffee-script'
-Bundle 'kien/ctrlp.vim'
-Bundle 'klen/python-mode'
-Bundle 'matchit.zip'
-Bundle 'rking/ag.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-dispatch'
-Bundle 'tpope/vim-endwise'
-Bundle 'tpope/vim-fugitive'
-Bundle 'tpope/vim-git'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-Bundle 'tpope/vim-vinegar'
-" }}}
+" Required:
+call neobundle#begin(expand('~/.vim/bundle'))
+
+" Let NeoBundle manage NeoBundle
+" Required:
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+" Plugins:
+NeoBundle 'Auto-Pairs'
+NeoBundle 'jelera/vim-javascript-syntax'
+NeoBundle 'kchmck/vim-coffee-script'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'klen/python-mode'
+NeoBundle 'matchit.zip'
+NeoBundle 'rking/ag.vim'
+NeoBundle 'scrooloose/nerdtree'
+NeoBundle 'tpope/vim-commentary'
+NeoBundle 'tpope/vim-dispatch'
+NeoBundle 'tpope/vim-endwise'
+NeoBundle 'tpope/vim-fugitive'
+NeoBundle 'tpope/vim-git'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'Shougo/unite.vim'
+
+" Cosmetic:
+NeoBundle 'airblade/vim-gitgutter'
+NeoBundle 'bling/vim-airline'
+NeoBundle 'brendonrapp/smyck-vim'
+NeoBundle 'chriskempson/vim-tomorrow-theme'
+NeoBundle 'rainbow_parentheses.vim'
+NeoBundle 'vim-scripts/xoria256.vim'
+
+" Tools:
+NeoBundle 'Shougo/vimproc.vim', {
+            \ 'build' : {
+            \     'linux' : 'make',
+            \     'mac' : 'make',
+            \    },
+            \ }
+
+" Required:
+call neobundle#end()
+
+" If there are uninstalled bundles found on startup,
+" this will conveniently prompt you to install them.
+NeoBundleCheck
+" NeoBundle }}}
 " Better defaults {{{
 set encoding=utf-8
 set hidden
 set number
 set mouse=a
-set ttymouse=xterm2
+" set ttymouse=xterm2
 set splitbelow
 set splitright
-set textwidth=72
+set autoread
+set wildmenu
+set wildignore=*.o,*.obj,*.pyc,*.class
+set laststatus=2
+" }}}
+" Formatting {{{
+set textwidth=80
 set tabstop=8
 set shiftwidth=4
 set softtabstop=-1 " use value of shiftwidth
 set backspace=2
 set expandtab
-set autoread
-set wildmenu
-set wildignore=*.o,*.obj,*.pyc,*.class
-" }}}
-" Formatting {{{
 set cinkeys=0{,0},0),0#,;,:,o,O,e
 set indentkeys=o,O,:,0#,e
 set cinoptions+=(0   " indent parenthetical function arguments correctly
@@ -102,12 +123,6 @@ set pastetoggle=<F5>    " used for pasting in data
 set ruler               " always show location information
 set showmatch           " show matching paren
 " }}}
-" Statusline {{{
-" see https://wincent.com/wiki/Set_the_Vim_statusline
-set laststatus=2
-set statusline=%<\ %n:\ %f\ %m%r%{fugitive#statusline()}%=%-35.(%y\ ln:\ %l/%L,\ col:\ %c%V\ (%P)%)
-
-" }}}
 " Autocmds {{{
 augroup filetype_settings
   autocmd!
@@ -115,6 +130,10 @@ augroup filetype_settings
   " vim
   autocmd FileType vim setlocal sw=2
   autocmd FileType vim setlocal foldmethod=marker
+
+  " python
+  autocmd FileType vim setlocal sw=2
+  setlocal keywordprg=pydoc
 
   " ruby
   autocmd FileType ruby setlocal sw=2
@@ -161,13 +180,6 @@ augroup compilation
   autocmd Filetype java setlocal makeprg=javac\ %
 augroup END
 
-" augroup auto_chdir
-  " autocmd!
-  " " from http://stackoverflow.com/questions/5793294/vim-cr-mapping-not-working
-  " " Automatically cd into the directory that the file is in
-  " autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-" augroup END
-
 " }}}
 " Helper Macros/functions{{{
 " global file replace on inner word
@@ -189,18 +201,9 @@ let g:pymode_rope = 0
 let g:pymode_options_max_line_length = 120
 let g:pymode_doc = 0
 
-" youcompleteme
-let g:ycm_autoclose_preview_window_after_completion = 1
-let g:ycm_collect_identifiers_from_tags_files = 1
-
 " NERDTree
 let g:NERDTreeRespectWildIgnore=1
 nnoremap <Leader>n :NERDTreeToggle<CR>
-
-" UltiSnips
-let g:UltiSnipsExpandTrigger="<c-j>"
-let g:UltiSnipsJumpForwardTrigger="<c-j>"
-let g:UltiSnipsJumpBackwardTrigger="<c-k>"
 
 " fugitive
 nnoremap <Leader>g :Gstatus<CR>
@@ -208,11 +211,6 @@ nnoremap <Leader>g :Gstatus<CR>
 " airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-
-" Themes
-let g:solarized_termcolors=256
-let g:molokai_original=1
-let g:hybrid_use_Xresources=1
 " }}}
 " Appearance {{{
 syntax on
@@ -223,11 +221,8 @@ if has('gui_running')
   set guioptions-=T " hide toolbar
   set guioptions-=r " hide scrollbar
   set guifont=Menlo\ Regular:h12
-  color xoria256
-else
-  color jellybeans
 endif
-" set list
+color Tomorrow-Night
 " }}}
 " Stuff from Ben {{{
 " I Make a bunch of text headlines
@@ -250,4 +245,3 @@ map! <Leader>sdate <cr><esc>k:r!date +"\%m/\%d/\%y"<cr>kJJi
 cnoremap %% <C-R>=expand('%:p:h').'/'<cr>
 nnoremap <Leader>v :e ~/.vimrc<CR>
 " }}}
-" vim: set fdm=marker:

@@ -1,10 +1,8 @@
-dotvim
-=====
+My vim configuration.
 
-My .vim folder. Plugins managed by [vundle] (https://github.com/gmarik/vundle).
-
-## To install:
-    git clone https://github.com/daf-/dotvim.git
-    git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
-	ln -s ~/.vim/vimrc ~/.vimrc
-	vim +BundleInstall +qall
+To install:
+```
+git clone https://github.com/dan-f/dotvim.git ~/.vim
+ln -s ~/.vim/.vimrc ~/.vimrc
+```
+Then [install NeoBundle](https://github.com/Shougo/neobundle.vim#1-install-neobundle).
