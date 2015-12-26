@@ -29,6 +29,7 @@ NeoBundle 'tpope/vim-dispatch'
 NeoBundle 'tpope/vim-endwise'
 NeoBundle 'tpope/vim-fugitive'
 NeoBundle 'tpope/vim-git'
+NeoBundle 'tpope/vim-sleuth'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'Shougo/unite.vim'
 
@@ -70,9 +71,6 @@ set laststatus=2
 " }}}
 " Formatting {{{
 set textwidth=80
-set tabstop=8
-set shiftwidth=4
-set softtabstop=-1 " use value of shiftwidth
 set backspace=2
 set expandtab
 set cinkeys=0{,0},0),0#,;,:,o,O,e
